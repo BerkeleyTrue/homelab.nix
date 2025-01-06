@@ -20,32 +20,29 @@
       imports = [
         inputs.home-manager-parts.flakeModule
       ];
-      perSystem = {
-        system,
-        ...
-      }:
-        let
-          pkgs = import inputs.nixpkgs {
-            inherit system;
+      perSystem = {system, ...}: let
+        pkgs = import inputs.nixpkgs {
+          inherit system;
 
-            overlays = [
+          overlays = [
+          ];
+
+          config = {
+            allowUnfree = true;
+            permittedInsecurePackages = [
             ];
-
-            config = {
-              allowUnfree = true;
-              permittedInsecurePackages = [
-              ];
-            };
-          };
-        in {
-          formatter = pkgs.alejandra;
-          _module.args.pkgs = pkgs;
-	  nixosConfiguration = {
-	    homelab = nixpkgs.lib.nixosSystem {
-	    	specialArgs = { inherity system; };
-
-		modules = [ ./nixos/configuration.nix ];
-	    };
           };
         };
+      in {
+        formatter = pkgs.alejandra;
+        _module.args.pkgs = pkgs;
+        nixosConfiguration = {
+          homelab = inputs.nixpkgs.lib.nixosSystem {
+            specialArgs = {inherit system;};
+
+            modules = [./nixos/configuration.nix];
+          };
+        };
+      };
+    };
 }
