@@ -14,7 +14,11 @@
     home-manager-parts.url = "github:berkeleytrue/home-manager-parts";
   };
 
-  outputs = inputs @ {flake-parts, ...}:
+  outputs = inputs @ {
+    self,
+    flake-parts,
+    ...
+  }:
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux"];
       imports = [
@@ -37,9 +41,11 @@
         _module.args.pkgs = pkgs;
       };
       flake = {
-        nixosModules = {
+        nixosConfigurations = {
           homelab = {
             modules = [./nixos/configuration.nix];
+            specialArgs = self.specialArgs;
+            system = "x86_64-linux";
           };
         };
       };
