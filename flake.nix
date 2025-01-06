@@ -41,7 +41,7 @@
         _module.args.pkgs = pkgs;
       };
       flake = {
-        nixosConfigurations = {
+        nixosConfigurations = inputs.nixpkgs.lib.nixosSystem {
           homelab = {
             modules = [./nixos/configuration.nix];
             specialArgs = self.specialArgs;
