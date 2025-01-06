@@ -18,7 +18,6 @@
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux"];
       imports = [
-        inputs.home-manager-parts.flakeModule
       ];
       perSystem = {system, ...}: let
         pkgs = import inputs.nixpkgs {
@@ -36,10 +35,10 @@
       in {
         formatter = pkgs.alejandra;
         _module.args.pkgs = pkgs;
-        nixosConfiguration = {
-          homelab = inputs.nixpkgs.lib.nixosSystem {
-            specialArgs = {inherit system;};
-
+      };
+      flake = {
+        nixosModules = {
+          homelab = {
             modules = [./nixos/configuration.nix];
           };
         };
