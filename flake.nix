@@ -42,11 +42,9 @@
       };
       flake = {
         nixosConfigurations = inputs.nixpkgs.lib.nixosSystem {
-          homelab = {
-            modules = [./nixos/configuration.nix];
-            specialArgs = self.specialArgs;
-            system = "x86_64-linux";
-          };
+          modules = [./nixos/configuration.nix];
+          specialArgs = self.specialArgs;
+          system = "x86_64-linux";
         };
       };
     };
