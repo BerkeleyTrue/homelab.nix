@@ -12,19 +12,22 @@
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
 
     home-manager-parts.url = "github:berkeleytrue/home-manager-parts";
+    boulder.url = "github:berkeleytrue/nix-boulder-banner";
   };
 
-  outputs = inputs @ {
-    flake-parts,
-    ...
-  }:
+  outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux"];
       imports = [
+        inputs.boulder.flakeModule
         inputs.home-manager-parts.flakeModule
         ./home
       ];
-      perSystem = {system, ...}: let
+      perSystem = {
+        config,
+        system,
+        ...
+      }: let
         pkgs = import inputs.nixpkgs {
           inherit system;
 
@@ -37,9 +40,58 @@
             ];
           };
         };
+
+        home-uri = ".\#homeConfigurations.homelab";
+        activation-package-uri = "${home-uri}.activationPackage";
+
+        build-nixos = pkgs.writeShellScriptBin "build-nixos" ''
+          # check if nixos-rebuild is available
+          nixos-rebuild switch --flake .
+        '';
+
+        home-manager-build = pkgs.writeShellScriptBin "build-home-manager" ''
+          # check if home-manager is available
+          nix build \
+            --show-trace \
+            --no-link \
+            --print-build-logs \
+            ${activation-package-uri} &&
+            nix flake show . && \
+            nix path-info ${activation-package-uri}
+        '';
+
+        get-home-manager-path = pkgs.writeShellScriptBin "get-home-manager-path" ''
+          nix path-info ${activation-package-uri}.
+        '';
+
+        home-manager-switch = pkgs.writeShellScriptBin "home-manager-switch" ''
+          eval "$$(${get-home-manager-path}/bin/get-home-manager-path switch)"
+        '';
       in {
         formatter = pkgs.alejandra;
         _module.args.pkgs = pkgs;
+
+        boulder.commands = [
+          {
+            category = "system";
+            description = "Switch NixOS";
+            exec = build-nixos;
+          }
+          {
+            category = "user";
+            description = "build Home Manager";
+            exec = home-manager-build;
+          }
+          {
+            category = "user";
+            description = "switch Home Manager";
+            exec = home-manager-switch;
+          }
+        ];
+
+        devShells.default = pkgs.mkShell {
+          inputsFrom = [config.boulder.devShell];
+        };
       };
       flake = {
         nixosConfigurations.homelab = inputs.nixpkgs.lib.nixosSystem {
