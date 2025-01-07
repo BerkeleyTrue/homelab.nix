@@ -27,7 +27,7 @@
 
     profiles = {
       # main homelab
-      bt = {
+      homelab = {
         username = "bt";
         modules = [
           ./modules
