@@ -65,7 +65,7 @@
         '';
 
         home-manager-switch = pkgs.writeShellScriptBin "home-manager-switch" ''
-          eval "$(${get-home-manager-path}/bin/get-home-manager-path switch)"
+          eval "$(${get-home-manager-path}/bin/get-home-manager-path)/home-path/bin/home-manager switch --flake ."
         '';
       in {
         formatter = pkgs.alejandra;
