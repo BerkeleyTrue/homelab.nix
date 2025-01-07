@@ -49,7 +49,7 @@
           nixos-rebuild switch --flake .
         '';
 
-        home-manager-build = pkgs.writeShellScriptBin "build-home-manager" ''
+        home-manager-build = pkgs.writeShellScriptBin "home-manager-build" ''
           # check if home-manager is available
           nix build \
             --show-trace \
