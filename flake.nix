@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixOS/nixpkgs/nixos-24.11";
 
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # utils
@@ -21,6 +21,8 @@
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux"];
       imports = [
+        inputs.home-manager-parts.flakeModule
+        ./home
       ];
       perSystem = {system, ...}: let
         pkgs = import inputs.nixpkgs {
