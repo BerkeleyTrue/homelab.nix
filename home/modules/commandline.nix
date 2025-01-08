@@ -88,6 +88,16 @@ in {
       enableZshIntegration = true;
     };
 
+    lazygit = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    lazydocker = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
     zsh = {
       enable = true;
 
