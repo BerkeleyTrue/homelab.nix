@@ -46,12 +46,12 @@
 
         nixos-build = pkgs.writeShellScriptBin "nixos-build" ''
           # check if nixos-rebuild is available
-          sudo nixos-rebuild switch --flake .
+          sudo nixos-rebuild switch --print-build-logs --show-trace --flake .
         '';
 
         nixos-dryrun = pkgs.writeShellScriptBin "nixos-dryrun" ''
           # check if nixos-rebuild is available
-          nixos-rebuild dry-run --flake .
+          nixos-rebuild dry-run --print-build-logs --show-trace --flake .
         '';
 
         home-manager-build = pkgs.writeShellScriptBin "home-manager-build" ''
