@@ -106,6 +106,10 @@ in {
       autosuggestion = {
         enable = true;
       };
+
+      history = {
+        size = 100;
+      };
     };
 
     atuin = {
