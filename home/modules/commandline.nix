@@ -97,6 +97,7 @@ in {
         v = "nvim";
         c = "clear";
         ":q" = "exit";
+        z = "zoxide";
       };
 
       autosuggestion = {
@@ -150,5 +151,10 @@ in {
         ];
       };
     };
+  };
+
+  zoxide = {
+    enable = true;
+    enableZshIntegration = true;
   };
 }
