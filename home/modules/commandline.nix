@@ -43,10 +43,6 @@ in {
     zsh # A shell designed for interactive use, although it is also a powerful scripting language
   ];
 
-  xdg.configFile."zsh/nix-packages.zsh".source = pkgs.writeText "nix-packages" ''
-    source "${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
-  '';
-
   xdg.configFile."containers/registries.conf".text = ''
     unqualified-search-registries = ["docker.io"]
 
@@ -109,6 +105,21 @@ in {
 
       history = {
         size = 100;
+      };
+
+      plugins = [
+        {
+          name = "zsh-vi-mode";
+          src = "${pkgs.zsh-vi-mode}/share/zsh-vi-mode";
+        }
+      ];
+
+      sessionVariables = {
+        EDITOR = "nvim";
+        VISUAL = "nvim";
+        ZVM_VI_HIGHLIGHT_FOREGROUND = "black";
+        ZVM_VI_HIGHLIGHT_BACKGROUND = "yellow";
+        ZVM_LINE_INIT_MODE = "i";
       };
     };
 
