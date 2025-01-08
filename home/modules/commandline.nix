@@ -96,6 +96,7 @@ in {
       enable = true;
 
       shellAliases = {
+        _ = "sudo";
         ll = "ls -ahlF";
         ".." = "cd ..";
         v = "nvim";
