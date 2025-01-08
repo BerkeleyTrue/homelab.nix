@@ -87,6 +87,25 @@ in {
     direnv = {
       enable = true;
       nix-direnv.enable = true;
+
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+    };
+
+    zsh = {
+      enable = true;
+
+      shellAliases = {
+        ll = "ls -ahlF";
+        ".." = "cd ..";
+        v = "nvim";
+        c = "clear";
+        ":q" = "exit";
+      };
+
+      autosuggestion = {
+        enable = true;
+      };
     };
 
     atuin = {
@@ -96,6 +115,8 @@ in {
         keymap_mode = "vim-normal";
         inline_height = 20;
       };
+
+      enableZshIntegration = true;
     };
 
     # Blazingly fast terminal file manager
