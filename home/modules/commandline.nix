@@ -101,7 +101,6 @@ in {
         v = "nvim";
         c = "clear";
         ":q" = "exit";
-        z = "zoxide";
         gpull = "git pull --rebase";
         gpush = "git push";
         gcom = "git commit";
