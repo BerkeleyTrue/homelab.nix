@@ -27,6 +27,7 @@ in {
     playerctl # pause/play music players ci
     podman # A program for managing pods, containers and container images
     podman-tui # Podman Terminal UI
+    podman-compose # A tool for running docker-compose.yml using podman
     procs # A modern replacement for ps written in Rust
     ripgrep # recursively searches directories for a regex pattern
     rsync # Fast incremental file transfer utility
