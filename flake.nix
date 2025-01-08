@@ -44,9 +44,14 @@
         home-uri = ".\#homeConfigurations.homelab";
         activation-package-uri = "${home-uri}.activationPackage";
 
-        build-nixos = pkgs.writeShellScriptBin "build-nixos" ''
+        nixos-build = pkgs.writeShellScriptBin "nixos-build" ''
           # check if nixos-rebuild is available
-          nixos-rebuild switch --flake .
+          sudo nixos-rebuild switch --flake .
+        '';
+
+        nixos-dryrun = pkgs.writeShellScriptBin "nixos-dryrun" ''
+          # check if nixos-rebuild is available
+          nixos-rebuild dry-run --flake .
         '';
 
         home-manager-build = pkgs.writeShellScriptBin "home-manager-build" ''
@@ -75,7 +80,12 @@
           {
             category = "system";
             description = "Switch NixOS";
-            exec = build-nixos;
+            exec = nixos-build;
+          }
+          {
+            category = "system";
+            description = "Dry run NixOS";
+            exec = nixos-dryrun;
           }
           {
             category = "user";
