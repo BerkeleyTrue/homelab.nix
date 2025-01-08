@@ -98,6 +98,12 @@ in {
         c = "clear";
         ":q" = "exit";
         z = "zoxide";
+        gpull = "git pull --rebase";
+        gpush = "git push";
+        gcom = "git commit";
+        gamend = "git commit --amend";
+        glog = "git log --pretty=format:\"%C(yellow)%h %C(green)%cs %Cred%d %Creset%s%Cblue [%cn]\" --decorate";
+        gstat = "git status";
       };
 
       autosuggestion = {
