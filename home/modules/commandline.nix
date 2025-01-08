@@ -20,7 +20,6 @@ in {
     gh # GitHub CLI
     htop # An interactive process viewer
     iputils # Network monitoring tools including ping
-    lazygit # simple terminal UI for git commands
     lazydocker # simple terminal ui for both docker and docker-compose
     lsof # lists open files
     ngrok # Introspected tunnels to localhost
@@ -90,12 +89,6 @@ in {
 
     lazygit = {
       enable = true;
-      enableZshIntegration = true;
-    };
-
-    lazydocker = {
-      enable = true;
-      enableZshIntegration = true;
     };
 
     zsh = {
@@ -167,10 +160,10 @@ in {
         ];
       };
     };
-  };
 
-  zoxide = {
-    enable = true;
-    enableZshIntegration = true;
+    zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+    };
   };
 }
