@@ -142,6 +142,10 @@ in {
         inline_height = 20;
       };
 
+      flags = [
+        "--disable-up-arrow"
+      ];
+
       enableZshIntegration = true;
     };
 
