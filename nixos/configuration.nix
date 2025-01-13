@@ -5,6 +5,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./disks-snapraid.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
