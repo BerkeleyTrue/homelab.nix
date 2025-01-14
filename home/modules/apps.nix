@@ -1,16 +1,19 @@
-{pkgs, ...}: let
-  gotas = pkgs.buildGoModule rec {
+{
+  pkgs,
+  ...
+}: let
+  gotas = pkgs.buildGoModule {
     pname = "gotas";
     version = "0.1.1";
 
     src = pkgs.fetchFromGitHub {
       owner = "szaffarano";
       repo = "gotas";
-      rev = "v${version}";
-      hash = "sha256-Gjw1dRrgM8D3G7v6WIM2+50r4HmTXvx0Xxme2fH9TlQ=";
+      rev = "12933a2f5a1eaa07b520b96184198724706a6ab6";
+      hash = "sha256-VduHspo/DnZN8ux9qcpi9jefNUBGOdzZmhbm1gYxG60=";
     };
 
-    vendorHash = "sha256-6hCgv2/8UIRHw1kCe3nLkxF23zE/7t5RDwEjSzX3pBQ=";
+    vendorHash = "sha256-s7P9cproB1gxjAwpS6NPMOb/rIaNLZQjoTToB7jvOuc=";
   };
 in {
   home.packages = [
