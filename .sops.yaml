@@ -1,0 +1,10 @@
+---
+keys:
+  - &admin_delora age1dwpdtl429567jsfnqvhw6wykg4kny334m80nmwc6snyhnanxjs7spa8klg
+  - &machine_homelab age1at50hzt9wm0ytxun273xzjp8h2kp9mswrs8ncfhz0p9cnh6fhggq78n4r9
+creation_rules:
+  - path_regex: secrets/[^/]+\.ya?ml$
+    key_groups:
+    - age:
+      - *admin_delora
+      - *machine_homelab
