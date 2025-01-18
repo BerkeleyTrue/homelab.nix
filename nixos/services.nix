@@ -13,4 +13,31 @@
   services.tailscale = {
     enable = true;
   };
+
+  services.traefik = {
+    enable = true;
+
+    staticConfigOptions = {
+      accessLog = true;
+      log.level = "TRACE";
+
+      global = {
+        checkNewVersion = false;
+        sendAnonymousUsage = false;
+      };
+
+      entrypoints = {
+        web.address = ":80";
+        secureweb = {
+          address = ":443";
+        };
+      };
+
+      api = {
+        dashboard = true;
+        debug = true;
+        insecure = true;
+      };
+    };
+  };
 }
