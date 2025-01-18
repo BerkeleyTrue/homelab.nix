@@ -7,6 +7,8 @@
     home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    sops-nix.url = "github:Mic92/sops-nix";
+
     # utils
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
@@ -105,7 +107,10 @@
       };
       flake = {
         nixosConfigurations.homelab = inputs.nixpkgs.lib.nixosSystem {
-          modules = [./nixos/configuration.nix];
+          modules = [
+            ./nixos/configuration.nix
+            inputs.nix-sops.nixosModules.sops
+          ];
           system = "x86_64-linux";
         };
       };
