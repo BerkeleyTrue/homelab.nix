@@ -19,7 +19,10 @@
 
     staticConfigOptions = {
       accessLog = true;
-      log.level = "TRACE";
+      log = {
+        level = "TRACE";
+        filePath = "/var/log/traefik.log";
+      };
 
       global = {
         checkNewVersion = false;
