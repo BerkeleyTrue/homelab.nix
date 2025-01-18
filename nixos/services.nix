@@ -17,10 +17,12 @@
   services.traefik = {
     enable = true;
 
+    dataDir = "/mnt/storage/traefik";
+
     staticConfigOptions = {
       accessLog = true;
       log = {
-        level = "TRACE";
+        level = "DEBUG";
         filePath = "/var/log/traefik.log";
       };
 
