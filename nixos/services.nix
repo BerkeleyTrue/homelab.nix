@@ -26,6 +26,12 @@
         filePath = "/var/log/traefik.log";
       };
 
+      api = {
+        dashboard = true;
+        debug = true;
+        insecure = true;
+      };
+
       global = {
         checkNewVersion = false;
         sendAnonymousUsage = false;
@@ -35,13 +41,47 @@
         web.address = ":80";
         secureweb = {
           address = ":443";
+          http.tls.certResolve = "cloudflare";
         };
       };
 
-      api = {
-        dashboard = true;
-        debug = true;
-        insecure = true;
+      serversTransport.insecureSkipVerify = true;
+
+      certificatesResolvers.cloudflare.acme = {
+        storage = "acme.json";
+        dnsChallenge = {
+          provider = "cloudflare";
+          resolvers = ["9.9.9.9:53" "149.112.112.112:53"];
+        };
+      };
+    };
+
+    dynamicConfigOptions = {
+      http.middlewares = {
+        traefik-https-redirect.redirectscheme.scheme = "https";
+        sslheader.headers.customrequestheaders.X-Forwarded-Proto = "https";
+        test-ipwhitelist.ipwhitelist.sourcerange = 192.168.1.1/24;
+      };
+
+      http.routers.traefik = {
+        entrypoints = "web";
+        rule = "Host(`traefik.{{traefik_public_url}}`)";
+        middlewares = "traefik-https-redirect";
+      };
+
+      http.routers.traefik-secure = {
+        entrypoints = "secureweb";
+        rule = "Host(`traefik.{{traefik_public_url}}`)";
+        tls = {
+          certresolver = "cloudflare";
+          domains = [
+            {
+              main = "traefik.{{traefik_public_url}}";
+              sans = "*.{{ traefik_public_url }}";
+            }
+          ];
+        };
+        servcie = "api@internal";
       };
     };
   };
