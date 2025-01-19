@@ -16,7 +16,7 @@ in {
     wantedBy = ["multi-user.target"];
     environment = {
       DOTNET_CONTENTROOT = dataDir;
-      Kestrel__Endpoints__Http__Url = "http://localhost:${toString port}";
+      Kestrel__Endpoints__Http__Url = "http://0.0.0.0:${toString port}";
     };
 
     serviceConfig = {
