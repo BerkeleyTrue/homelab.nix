@@ -135,6 +135,8 @@ in {
     openFirewall = true;
   };
 
+  networking.firewall.allowedTCPPORTS = [53];
+
   services.traefik.dynamicConfigOptions.http.routers.adguard = {
     entrypoints = "web";
     rule = "Host(`adguard.${traefik_public_url}`)";
