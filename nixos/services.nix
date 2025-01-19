@@ -63,7 +63,7 @@ in {
       http.middlewares = {
         traefik-https-redirect.redirectscheme.scheme = "https";
         sslheader.headers.customrequestheaders.X-Forwarded-Proto = "https";
-        test-ipwhitelist.ipwhitelist.sourcerange = 192.168.1.1/24;
+        test-ipwhitelist.ipwhitelist.sourcerange = "192.168.1.1/24";
       };
 
       http.routers.traefik = {
