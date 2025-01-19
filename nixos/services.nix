@@ -80,7 +80,7 @@ in {
       serversTransport.insecureSkipVerify = true;
 
       certificatesResolvers.letsencrypt.acme = {
-        email = config.sops.secrets.cloudflare_email.path;
+        email = "${config.sops.secrets.cloudflare_email.path}";
         storage = "/var/lib/traefik/acme.json";
         dnsChallenge = {
           provider = "cloudflare";
