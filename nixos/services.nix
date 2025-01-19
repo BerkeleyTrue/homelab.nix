@@ -110,7 +110,7 @@ in {
       http.routers.traefik = {
         entrypoints = "web";
         rule = "Host(`traefik.${traefik_public_url}`)";
-        middlewares = "traefik-https-redirect";
+        middlewares = ["ssl-redirect" "ssl-header"];
       };
 
       http.routers.traefik-secure = {
@@ -144,7 +144,7 @@ in {
 
   services.traefik.dynamicConfigOptions.http.services.adguard = {
     loadBalancer = {
-      servers.url = "http://127.0.0.1:3000";
+      servers = [{url = "http://127.0.0.1:3000";}];
       passHostHeader = true;
     };
   };
