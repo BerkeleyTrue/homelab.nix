@@ -27,8 +27,6 @@ in {
   services.traefik = {
     enable = true;
 
-    dataDir = "/mnt/storage/traefik";
-
     staticConfigOptions = {
       accessLog = {
         filePath = "/run/traefik/access.log";
@@ -76,9 +74,9 @@ in {
 
       serversTransport.insecureSkipVerify = true;
 
-      certificatesResolvers.cloudflare.acme = {
+      certificatesResolvers.letsencrypt.acme = {
         email = config.sops.secrets.cloudflare_email.path;
-        storage = "acme.json";
+        storage = "/var/lib/traefik/acme.json";
         dnsChallenge = {
           provider = "cloudflare";
           resolvers = ["9.9.9.9:53" "149.112.112.112:53"];
