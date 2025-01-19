@@ -1,6 +1,9 @@
 {config, ...}: let
   traefik_public_url = "r3dm.com";
 in {
+  imports = [
+    ./services/lubelogger.nix
+  ];
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
