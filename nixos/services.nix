@@ -21,6 +21,11 @@ in {
 
     dataDir = "/mnt/storage/traefik";
 
+    environment = {
+      CF_API_EMAIL = config.sops.secrets.cloudflare_email.path;
+      CF_DNS_API_TOKEN = config.sops.secrets.cloudflare_dns_api_token.path;
+    };
+
     staticConfigOptions = {
       accessLog = true;
       log = {
@@ -43,7 +48,7 @@ in {
         web.address = ":80";
         secureweb = {
           address = ":443";
-          http.tls.certResolve = "cloudflare";
+          http.tls.certResolver = "cloudflare";
         };
       };
 
