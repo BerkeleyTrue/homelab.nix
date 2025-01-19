@@ -50,7 +50,7 @@ in {
       serversTransport.insecureSkipVerify = true;
 
       certificatesResolvers.cloudflare.acme = {
-        email = config.sops.secrets.cloudflare_email;
+        email = config.sops.secrets.cloudflare_email.path;
         storage = "acme.json";
         dnsChallenge = {
           provider = "cloudflare";
