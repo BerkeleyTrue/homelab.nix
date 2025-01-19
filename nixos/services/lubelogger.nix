@@ -10,16 +10,14 @@
   group = "lubelogger";
   dataDir = "/mnt/storage/lubelogger";
 in {
-  services.lubelogger.settings = {
-    DOTNET_CONTENTROOT = dataDir;
-    Kestrel__Endpoints__Http__Url = "http://localhost:${toString port}";
-  };
-
   systemd.services.lubelogger = {
     description = "Lubelogger, a self-hosted, open-source, web-based vehicle maintenance and fuel milage tracker";
     after = ["network.target"];
     wantedBy = ["multi-user.target"];
-    environment = {};
+    environment = {
+      DOTNET_CONTENTROOT = dataDir;
+      Kestrel__Endpoints__Http__Url = "http://localhost:${toString port}";
+    };
 
     serviceConfig = {
       Type = "simple";
