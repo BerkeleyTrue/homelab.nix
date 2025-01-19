@@ -91,9 +91,20 @@ in {
 
     dynamicConfigOptions = {
       http.middlewares = {
-        traefik-https-redirect.redirectscheme.scheme = "https";
-        sslheader.headers.customrequestheaders.X-Forwarded-Proto = "https";
-        test-ipwhitelist.ipwhitelist.sourcerange = "192.168.1.1/24";
+        ssl-redirect.redirectscheme.scheme = "https";
+        ssl-header.headers.customrequestheaders.X-Forwarded-Proto = "https";
+        default-whitelist.ipwhitelist.sourcerange = [];
+
+        default-headers.headers = {
+          frameDeny = true;
+          browserXssFilter = true;
+          contentTypeNosniff = true;
+          forceSTSHeader = true;
+          stsIncludeSubdomains = true;
+          stsPreload = true;
+          stsSeconds = "15552000";
+          customFrameOptionsValue = "SAMEORIGIN";
+        };
       };
 
       http.routers.traefik = {
@@ -116,6 +127,25 @@ in {
         };
         service = "api@internal";
       };
+    };
+  };
+
+  services.adguardhome = {
+    enable = true;
+    openFirewall = true;
+  };
+
+  services.traefik.dynamicConfigOptions.http.routers.adguard = {
+    entrypoints = "web";
+    rule = "Host(`adguard.${traefik_public_url}`)";
+    service = "adguard";
+    middlewares = ["default-headers"];
+  };
+
+  services.traefik.dynamicConfigOptions.http.services.adguard = {
+    loadBalencer = {
+      servers.url = "http://localhost:3000";
+      passHostHeader = true;
     };
   };
 }
