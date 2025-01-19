@@ -109,7 +109,7 @@
         nixosConfigurations.homelab = inputs.nixpkgs.lib.nixosSystem {
           modules = [
             ./nixos/configuration.nix
-            inputs.nix-sops.nixosModules.sops
+            inputs.sops-nix.nixosModules.sops
           ];
           system = "x86_64-linux";
         };
