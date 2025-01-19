@@ -33,7 +33,7 @@ in {
       accessLog = true;
       log = {
         level = "DEBUG";
-        filePath = "/var/log/traefik.log";
+        filePath = "/run/traefik/traefik.log";
       };
 
       api = {
