@@ -4,6 +4,7 @@
 {pkgs, ...}: {
   imports = [
     # Include the results of the hardware scan.
+    ../modules/sops.nix
     ./hardware-configuration.nix
     ./disks-snapraid.nix
     ./services.nix

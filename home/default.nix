@@ -19,6 +19,8 @@
 
     shared = {profile, ...}: {
       modules = [
+        inputs.sops-nix.homeManagerModules.sops
+         ../modules/sops.nix
       ];
       extraSpecialArgs = {
         inherit profile;
@@ -32,7 +34,6 @@
         modules = [
           ./modules
         ];
-
         specialArgs = {};
       };
     };
