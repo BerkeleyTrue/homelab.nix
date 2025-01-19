@@ -111,7 +111,7 @@ in {
             }
           ];
         };
-        servcie = "api@internal";
+        service = "api@internal";
       };
     };
   };
