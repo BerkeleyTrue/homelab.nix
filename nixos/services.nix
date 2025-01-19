@@ -16,15 +16,18 @@ in {
     enable = true;
   };
 
+  sops.secrets.cloudflare_email = {};
+  sops.secrets.cloudflare_dns_api_token = {};
+
+  systemd.services.traefik.environment = {
+    CF_API_EMAIL = config.sops.secrets.cloudflare_email.path;
+    CF_DNS_API_TOKEN = config.sops.secrets.cloudflare_dns_api_token.path;
+  };
+
   services.traefik = {
     enable = true;
 
     dataDir = "/mnt/storage/traefik";
-
-    environment = {
-      CF_API_EMAIL = config.sops.secrets.cloudflare_email.path;
-      CF_DNS_API_TOKEN = config.sops.secrets.cloudflare_dns_api_token.path;
-    };
 
     staticConfigOptions = {
       accessLog = true;
