@@ -2,11 +2,15 @@
   traefik_public_url = "r3dm.com";
 in {
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    openFirewall = true;
+  };
 
   services.taskchampion-sync-server = {
     enable = true;
     port = 10222;
+    openFirewall = true;
   };
 
   # Configure keymap in X11
@@ -14,6 +18,7 @@ in {
 
   services.tailscale = {
     enable = true;
+    openFirewall = true;
   };
 
   sops.secrets.cloudflare_email = {};
