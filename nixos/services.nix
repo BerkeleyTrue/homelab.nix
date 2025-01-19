@@ -73,7 +73,7 @@ in {
         web.address = ":80";
         secureweb = {
           address = ":443";
-          http.tls.certResolver = "cloudflare";
+          http.tls.certResolver = "letsencrypt";
         };
       };
 
@@ -117,7 +117,7 @@ in {
         entrypoints = "secureweb";
         rule = "Host(`traefik.${traefik_public_url}`)";
         tls = {
-          certresolver = "cloudflare";
+          certresolver = "letsencrypt";
           domains = [
             {
               main = "traefik.${traefik_public_url}}";
@@ -144,7 +144,7 @@ in {
 
   services.traefik.dynamicConfigOptions.http.services.adguard = {
     loadBalancer = {
-      servers.url = "http://localhost:3000";
+      servers.url = "http://127.0.0.1:3000";
       passHostHeader = true;
     };
   };
