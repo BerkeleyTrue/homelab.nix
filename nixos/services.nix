@@ -30,7 +30,26 @@ in {
     dataDir = "/mnt/storage/traefik";
 
     staticConfigOptions = {
-      accessLog = true;
+      accessLog = {
+        filePath = "/run/traefik/access.log";
+        format = "json";
+
+        fields = {
+          defaultMode = "drop";
+          names = {
+            RouterName = "keep";
+            ServiceName = "keep";
+            RequestAddr = "keep";
+            RequestHost = "keep";
+            RequestMethod = "keep";
+            RequestPath = "keep";
+            RequestProtocol = "keep";
+            RequestScheme = "keep";
+            ClientHost = "keep";
+          };
+        };
+      };
+
       log = {
         level = "DEBUG";
         filePath = "/run/traefik/traefik.log";
