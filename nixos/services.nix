@@ -143,7 +143,7 @@ in {
   };
 
   services.traefik.dynamicConfigOptions.http.services.adguard = {
-    loadBalencer = {
+    loadBalancer = {
       servers.url = "http://localhost:3000";
       passHostHeader = true;
     };
