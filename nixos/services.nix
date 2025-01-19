@@ -1,4 +1,6 @@
-{...}: {
+{config, ...}: let
+  traefik_public_url = "r3dm.com";
+in {
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
@@ -48,6 +50,7 @@
       serversTransport.insecureSkipVerify = true;
 
       certificatesResolvers.cloudflare.acme = {
+        email = config.secrets.cloudflare_email;
         storage = "acme.json";
         dnsChallenge = {
           provider = "cloudflare";
@@ -65,19 +68,19 @@
 
       http.routers.traefik = {
         entrypoints = "web";
-        rule = "Host(`traefik.{{traefik_public_url}}`)";
+        rule = "Host(`traefik.${traefik_public_url}`)";
         middlewares = "traefik-https-redirect";
       };
 
       http.routers.traefik-secure = {
         entrypoints = "secureweb";
-        rule = "Host(`traefik.{{traefik_public_url}}`)";
+        rule = "Host(`traefik.${traefik_public_url}`)";
         tls = {
           certresolver = "cloudflare";
           domains = [
             {
-              main = "traefik.{{traefik_public_url}}";
-              sans = "*.{{ traefik_public_url }}";
+              main = "traefik.${traefik_public_url}}";
+              sans = "*.${traefik_public_url}";
             }
           ];
         };

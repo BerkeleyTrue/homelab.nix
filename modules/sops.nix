@@ -6,4 +6,5 @@
     ];
     keyFile = "~/.config/sops/age/keys.txt";
   };
+  sops.secrets.cloudflare_email = {};
 }
