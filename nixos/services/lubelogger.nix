@@ -35,21 +35,9 @@ in {
       '';
       ExecStart = "${lib.getExe package}";
       Restart = "on-failure";
-      # BindPaths = [
-      #   "${cfg.dataDir}/config:${cfg.package}/lib/lubelogger/config"
-      #   "${cfg.dataDir}/data:${cfg.package}/lib/lubelogger/data"
-      #   "${cfg.dataDir}/temp:${cfg.package}/lib/lubelogger/wwwroot/temp"
-      #   "${cfg.dataDir}/images:${cfg.package}/lib/lubelogger/wwwroot/images"
-      # ];
     };
   };
 
-  # systemd.tmpfiles.rules = [
-  #   "d '${cfg.dataDir}/config' 0770 '${cfg.user}' '${cfg.group}' - -"
-  #   "d '${cfg.dataDir}/data' 0770 '${cfg.user}' '${cfg.group}' - -"
-  #   "d '${cfg.dataDir}/temp' 0770 '${cfg.user}' '${cfg.group}' - -"
-  #   "d '${cfg.dataDir}/images' 0770 '${cfg.user}' '${cfg.group}' - -"
-  # ];
 
   users.users.lubelogger = {
     inherit group;
