@@ -1,7 +1,11 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-{inputs, pkgs, ...}: {
+{
+  outPath,
+  pkgs,
+  ...
+}: {
   imports = [
     # Include the results of the hardware scan.
     ../modules/sops.nix
@@ -70,7 +74,7 @@
 
   system.autoUpgrade = {
     enable = true;
-    flake = inputs.self.outPath;
+    flake = outPath;
     dates = "weekly";
     randomizedDelaySec = "45min";
     flags = [

@@ -17,7 +17,11 @@
     boulder.url = "github:berkeleytrue/nix-boulder-banner";
   };
 
-  outputs = inputs @ {flake-parts, ...}:
+  outputs = inputs @ {
+    self,
+    flake-parts,
+    ...
+  }:
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux"];
       imports = [
@@ -111,7 +115,9 @@
             ./nixos/configuration.nix
             inputs.sops-nix.nixosModules.sops
           ];
-          system = "x86_64-linux";
+          specialArgs = {
+            inherit (self) outPath;
+          };
         };
       };
     };
