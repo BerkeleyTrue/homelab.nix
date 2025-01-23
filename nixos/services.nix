@@ -115,6 +115,7 @@ in {
         entrypoints = "web";
         rule = "Host(`traefik.${traefik_public_url}`)";
         middlewares = ["ssl-redirect" "ssl-header"];
+        service = "api@internal";
       };
 
       http.routers.traefik-secure = {
