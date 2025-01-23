@@ -3,6 +3,7 @@
 in {
   imports = [
     ./services/lubelogger.nix
+    ./services/home-assistant.nix
   ];
   # Enable the OpenSSH daemon.
   services.openssh = {
