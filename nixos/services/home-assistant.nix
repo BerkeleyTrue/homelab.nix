@@ -22,12 +22,12 @@ in {
 
   services.traefik.dynamicConfigOptions.http.routers.home-assistant = {
     entrypoints = "web";
-    rule = "Host(`home-assistantr.${traefik_public_url}`)";
-    service = "home-assistantr";
+    rule = "Host(`home-assistant.${traefik_public_url}`)";
+    service = "home-assistant";
     middlewares = ["default-headers"];
   };
 
-  services.traefik.dynamicConfigOptions.http.services.home-assistantr = {
+  services.traefik.dynamicConfigOptions.http.services.home-assistant = {
     loadBalancer = {
       servers = [{url = "http://0.0.0.0:${toString port}";}];
       passHostHeader = true;
