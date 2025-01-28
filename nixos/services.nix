@@ -125,7 +125,7 @@ in {
           certresolver = "letsencrypt";
           domains = [
             {
-              main = "traefik.${traefik_public_url}}";
+              main = "traefik.${traefik_public_url}";
               sans = "*.${traefik_public_url}";
             }
           ];
