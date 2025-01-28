@@ -85,6 +85,10 @@
     ];
   };
 
+  security.sudo.extraConfig = ''
+    Defaults timestamp_timeout=60
+  '';
+
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nix.settings.auto-optimise-store = true;
 
