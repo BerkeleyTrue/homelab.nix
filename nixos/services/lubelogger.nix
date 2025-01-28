@@ -49,17 +49,27 @@ in {
 
   networking.firewall.allowedTCPPorts = [port];
 
-  services.traefik.dynamicConfigOptions.http.routers.lubelogger = {
-    entrypoints = "web";
-    rule = "Host(`lubelogger.${traefik_public_url}`)";
-    service = "lubelogger";
-    middlewares = ["default-headers"];
-  };
-
   services.traefik.dynamicConfigOptions.http.services.lubelogger = {
     loadBalancer = {
       servers = [{url = "http://0.0.0.0:${toString port}";}];
       passHostHeader = true;
     };
+  };
+
+  services.traefik.dynamicConfigOptions.http.routers.lubelogger = {
+    entrypoints = "web";
+    service = "lubelogger";
+    rule = "Host(`lubelogger.${traefik_public_url}`)";
+
+    middlewares = ["ssl-redirect" "ssl-header"];
+  };
+
+  services.traefik.dynamicConfigOptions.http.routers.lubelogger-secure = {
+    entrypoints = "secureweb";
+    service = "lubelogger";
+    rule = "Host(`lubelogger.${traefik_public_url}`)";
+
+    middlewares = ["default-headers"];
+    tls.certResolver = "letsencrypt";
   };
 }

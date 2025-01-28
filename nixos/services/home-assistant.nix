@@ -20,17 +20,27 @@ in {
     };
   };
 
-  services.traefik.dynamicConfigOptions.http.routers.home-assistant = {
-    entrypoints = "web";
-    rule = "Host(`home-assistant.${traefik_public_url}`)";
-    service = "home-assistant";
-    middlewares = ["default-headers"];
-  };
-
   services.traefik.dynamicConfigOptions.http.services.home-assistant = {
     loadBalancer = {
       servers = [{url = "http://0.0.0.0:${toString port}";}];
       passHostHeader = true;
     };
+  };
+
+  services.traefik.dynamicConfigOptions.http.routers.home-assistant = {
+    entrypoints = "web";
+    service = "home-assistant";
+    rule = "Host(`home-assistant.${traefik_public_url}`)";
+
+    middlewares = ["ssl-redirect" "ssl-header"];
+  };
+
+  services.traefik.dynamicConfigOptions.http.routers.home-assistant-secure = {
+    entrypoints = "secureweb";
+    service = "home-assistant";
+    rule = "Host(`home-assistant.${traefik_public_url}`)";
+
+    middlewares = ["default-headers"];
+    tls.certResolver = "letsencrypt";
   };
 }
