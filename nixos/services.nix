@@ -144,17 +144,25 @@ in {
 
   networking.firewall.allowedUDPPorts = [53];
 
+  services.traefik.dynamicConfigOptions.http.services.adguard = {
+    loadBalancer = {
+      servers = [{url = "http://${config.services.adguardhome.host}:${toString config.services.adguardhome.port}";}];
+      passHostHeader = true;
+    };
+  };
+
   services.traefik.dynamicConfigOptions.http.routers.adguard = {
     entrypoints = "web";
     rule = "Host(`adguard.${traefik_public_url}`)";
     service = "adguard";
-    middlewares = ["default-headers"];
+    middlewares = ["ssl-redirect"];
   };
 
-  services.traefik.dynamicConfigOptions.http.services.adguard = {
-    loadBalancer = {
-      servers = [{url = "http://127.0.0.1:3000";}];
-      passHostHeader = true;
-    };
+  services.traefik.dynamicConfigOptions.http.routers.adguard-secure = {
+    entrypoints = "secureweb";
+    rule = "Host(`adguard.${traefik_public_url}`)";
+    service = "adguard";
+    middlewares = ["default-headers"];
+    tls.certResolver = "letsencrypt";
   };
 }
