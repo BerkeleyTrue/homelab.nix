@@ -129,6 +129,7 @@ in {
       http.routers.traefik-secure = {
         entrypoints = "secureweb";
         rule = "Host(`traefik.${traefik_public_url}`)";
+        middlewares = ["default-headers"];
         tls.certresolver = "letsencrypt";
         service = "api@internal";
       };
@@ -151,15 +152,17 @@ in {
 
   services.traefik.dynamicConfigOptions.http.routers.adguard = {
     entrypoints = "web";
-    rule = "Host(`adguard.${traefik_public_url}`)";
     service = "adguard";
+    rule = "Host(`adguard.${traefik_public_url}`)";
+
     middlewares = ["ssl-redirect" "ssl-header"];
   };
 
   services.traefik.dynamicConfigOptions.http.routers.adguard-secure = {
     entrypoints = "secureweb";
-    rule = "Host(`adguard.${traefik_public_url}`)";
     service = "adguard";
+    rule = "Host(`adguard.${traefik_public_url}`)";
+
     middlewares = ["default-headers"];
     tls.certResolver = "letsencrypt";
   };
