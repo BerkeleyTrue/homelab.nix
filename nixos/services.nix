@@ -131,12 +131,6 @@ in {
         rule = "Host(`traefik.${traefik_public_url}`)";
         tls = {
           certresolver = "letsencrypt";
-          domains = [
-            {
-              main = "traefik.${traefik_public_url}";
-              sans = "*.${traefik_public_url}";
-            }
-          ];
         };
         service = "api@internal";
       };
