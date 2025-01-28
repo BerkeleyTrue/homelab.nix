@@ -25,12 +25,20 @@ in {
     openFirewall = true;
   };
 
-  sops.secrets.cloudflare_email = {};
-  sops.secrets.cloudflare_dns_api_token = {};
+  sops.secrets.cloudflare_email = {
+    mode = "0440";
+    owner = config.users.users.traefik.name;
+    group = config.users.users.traefik.group;
+  };
+  sops.secrets.cloudflare_dns_api_token = {
+    mode = "0440";
+    owner = config.users.users.traefik.name;
+    group = config.users.users.traefik.group;
+  };
 
   systemd.services.traefik.environment = {
-    CF_API_EMAIL = config.sops.secrets.cloudflare_email.path;
-    CF_DNS_API_TOKEN = config.sops.secrets.cloudflare_dns_api_token.path;
+    CF_API_EMAIL_FILE = config.sops.secrets.cloudflare_email.path;
+    CF_DNS_API_TOKEN_FILE = config.sops.secrets.cloudflare_dns_api_token.path;
   };
 
   services.traefik = {
@@ -84,7 +92,7 @@ in {
       serversTransport.insecureSkipVerify = true;
 
       certificatesResolvers.letsencrypt.acme = {
-        email = "${config.sops.secrets.cloudflare_email.path}";
+        # email = "cat ${config.sops.secrets.cloudflare_email.path}";
         storage = "/var/lib/traefik/acme.json";
         dnsChallenge = {
           provider = "cloudflare";
