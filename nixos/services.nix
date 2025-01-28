@@ -103,10 +103,8 @@ in {
 
     dynamicConfigOptions = {
       http.middlewares = {
-        ssl-redirect = {
-          redirectscheme.scheme = "https";
-          headers.customrequestheaders.X-Forwarded-Proto = "https";
-        };
+        ssl-redirect.redirectscheme.scheme = "https";
+        ssl-header.headers.customrequestheaders.X-Forwarded-Proto = "https";
         default-whitelist.ipwhitelist.sourcerange = [];
 
         default-headers.headers = {
@@ -124,7 +122,7 @@ in {
       http.routers.traefik = {
         entrypoints = "web";
         rule = "Host(`traefik.${traefik_public_url}`)";
-        middlewares = ["ssl-redirect"];
+        middlewares = ["ssl-redirect" "ssl-header"];
         service = "api@internal";
       };
 
@@ -155,7 +153,7 @@ in {
     entrypoints = "web";
     rule = "Host(`adguard.${traefik_public_url}`)";
     service = "adguard";
-    middlewares = ["ssl-redirect"];
+    middlewares = ["ssl-redirect" "ssl-header"];
   };
 
   services.traefik.dynamicConfigOptions.http.routers.adguard-secure = {
