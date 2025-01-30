@@ -59,7 +59,7 @@ in {
     tls.certResolver = "letsencrypt";
   };
 
-  sops.secrets.mosquitto_email = {};
+  sops.secrets.mosquitto_password = {};
 
   networking.firewall.allowedTCPPorts = [mqtt_port];
 
@@ -72,7 +72,7 @@ in {
         port = mqtt_port;
         users.mosquitto = {
           acl = ["readwrite #"];
-          passwordFile = config.sops.secrets.mosquitto_email.path;
+          passwordFile = config.sops.secrets.mosquitto_password.path;
         };
       }
     ];
