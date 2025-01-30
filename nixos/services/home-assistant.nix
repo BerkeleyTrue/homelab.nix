@@ -77,4 +77,13 @@ in {
       }
     ];
   };
+
+  services.zigbee2mqtt = {
+    enable = true;
+  };
+
+  services.esphome = {
+    enable = true;
+    openFirewall = true;
+  };
 }
