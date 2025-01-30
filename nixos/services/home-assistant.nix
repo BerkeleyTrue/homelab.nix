@@ -1,24 +1,37 @@
-{...}: let
+{config, ...}: let
   traefik_public_url = "r3dm.com";
   port = 8123;
+  mqtt_port = 1883;
 in {
   services.home-assistant = {
     enable = true;
 
     openFirewall = true;
 
+    extraComponents = [
+      "esphome"
+      "tasmota"
+      "openweathermap"
+    ];
+
     config = {
+      # provide sane defaults
+      default_config = {};
+
       homeassistant = {
         name = "roseann";
         unit_system = "imperial";
         temperature_unit = "F";
         time_zone = "America/Los_Angeles";
       };
+
       http = {
         server_port = port;
         trusted_proxies = "127.0.0.1";
         use_x_forwarded_for = true;
       };
+
+      mqtt = {};
     };
   };
 
@@ -44,5 +57,24 @@ in {
 
     middlewares = ["default-headers"];
     tls.certResolver = "letsencrypt";
+  };
+
+  sops.secrets.mosquitto_email = {};
+
+  networking.firewall.allowedTCPPorts = [mqtt_port];
+
+  services.mosquitto = {
+    enable = true;
+
+    listeners = [
+      {
+        address = "127.0.0.1";
+        port = mqtt_port;
+        users.mosquitto = {
+          acl = ["readwrite #"];
+          passwordFile = config.sops.secrets.mosquitto_email.path;
+        };
+      }
+    ];
   };
 }
