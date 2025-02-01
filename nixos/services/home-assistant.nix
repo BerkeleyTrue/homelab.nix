@@ -2,7 +2,7 @@
   traefik_public_url = "r3dm.com";
   port = 8123;
   mqtt_port = 1883;
-  zigbee2mqtt_port = 8080;
+  zigbee2mqtt_port = 9090;
 in {
   services.home-assistant = {
     enable = true;
