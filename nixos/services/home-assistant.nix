@@ -2,6 +2,7 @@
   traefik_public_url = "r3dm.com";
   port = 8123;
   mqtt_port = 1883;
+  zigbee2mqtt_port = 8080;
 in {
   services.home-assistant = {
     enable = true;
@@ -86,6 +87,7 @@ in {
 
   services.zigbee2mqtt = {
     enable = true;
+
     settings = {
       serial.port = "/dev/ttyUSB0";
       availability = true;
@@ -93,8 +95,40 @@ in {
         user = "mosquitto";
         password = "!${config.sops.templates."mqtt_password.yml".path} mqtt_password";
       };
+
+      frontend = {
+        enable = true;
+        port = zigbee2mqtt_port;
+        host = "127.0.0.1";
+      };
     };
   };
+
+
+  services.traefik.dynamicConfigOptions.http.services.z2m = {
+    loadBalancer = {
+      servers = [{url = "http://127.0.0.1:${toString zigbee2mqtt_port}";}];
+      passHostHeader = true;
+    };
+  };
+
+  services.traefik.dynamicConfigOptions.http.routers.z2m = {
+    entrypoints = "web";
+    service = "z2m";
+    rule = "Host(`z2m.${traefik_public_url}`)";
+
+    middlewares = ["ssl-redirect" "ssl-header"];
+  };
+
+  services.traefik.dynamicConfigOptions.http.routers.z2m-secure = {
+    entrypoints = "secureweb";
+    service = "z2m";
+    rule = "Host(`z2m.${traefik_public_url}`)";
+
+    middlewares = ["default-headers"];
+    tls.certResolver = "letsencrypt";
+  };
+
 
   services.esphome = {
     enable = true;
