@@ -80,7 +80,14 @@ in {
 
   services.zigbee2mqtt = {
     enable = true;
-    settings.serial.port = "/dev/ttyUSB0";
+    settings = {
+      serial.port = "/dev/ttyUSB0";
+      availability = true;
+      mqtt = {
+        user = "mosquitto";
+        passwordFile = config.sops.secrets.mosquitto_password.path;
+      };
+    };
   };
 
   services.esphome = {
