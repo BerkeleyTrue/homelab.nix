@@ -79,9 +79,10 @@ in {
   };
 
   sops.templates."mqtt_password.yml".content = ''
-    mqtt_password = "${config.sops.secrets.mosquitto_password.path}";
+    mqtt_password: "${config.sops.placeholder.mosquitto_password}"
   '';
-  sops.temperature."mqtt_password.yml".owner = config.users.user.zigbee2mqtt.name;
+
+  sops.templates."mqtt_password.yml".owner = config.users.users.zigbee2mqtt.name;
 
   services.zigbee2mqtt = {
     enable = true;
@@ -90,7 +91,7 @@ in {
       availability = true;
       mqtt = {
         user = "mosquitto";
-        password = "!${config.sops.templates."mqtt_password.yml".path} password";
+        password = "!${config.sops.templates."mqtt_password.yml".path} mqtt_password";
       };
     };
   };
