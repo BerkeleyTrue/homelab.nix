@@ -80,6 +80,7 @@ in {
 
   services.zigbee2mqtt = {
     enable = true;
+    settings.serial.port = "/dev/ttyUSB0";
   };
 
   services.esphome = {
