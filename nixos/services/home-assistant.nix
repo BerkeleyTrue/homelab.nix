@@ -81,6 +81,7 @@ in {
   sops.templates."mqtt_password.yml".content = ''
     mqtt_password = "${config.sops.secrets.mosquitto_password.path}";
   '';
+  sops.temperature."mqtt_password.yml".owner = config.users.user.zigbee2mqtt.name;
 
   services.zigbee2mqtt = {
     enable = true;
