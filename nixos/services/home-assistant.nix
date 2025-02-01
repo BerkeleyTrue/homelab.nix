@@ -85,7 +85,7 @@ in {
       availability = true;
       mqtt = {
         user = "mosquitto";
-        passwordFile = config.sops.secrets.mosquitto_password.path;
+        password = "!${config.sops.secrets.mosquitto_password.path}";
       };
     };
   };
