@@ -78,6 +78,13 @@ in {
     ];
   };
 
+  sops.secrets."services/mosquitto/mq/plainPassword.yaml" = {
+    sopsFile = ../../secrets/secrets.yml;
+    owner = config.users.users.zigbee2mqtt.name;
+    inherit (config.users.users.zigbee2mqtt) group;
+    restartUnits = [ "zigbee2mqtt.service" ];
+  };
+
   services.zigbee2mqtt = {
     enable = true;
     settings = {
@@ -85,7 +92,7 @@ in {
       availability = true;
       mqtt = {
         user = "mosquitto";
-        password = "!${config.sops.secrets.mosquitto_password.path}";
+        password = "!${config.sops.secrets."services/mosquitto/mq/plainPassword.yaml".path} mosquitto_password";
       };
     };
   };
