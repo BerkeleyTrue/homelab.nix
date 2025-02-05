@@ -1,9 +1,19 @@
 {config, ...}: let
   traefik_public_url = "r3dm.com";
   port = 8123;
+  homekit_port = 51827;
   mqtt_port = 1883;
   zigbee2mqtt_port = 9090;
+  mDNS = 5353;
 in {
+  networking.firewall.allowedTCPPorts = [
+    mqtt_port
+    homekit_port # allow homekit protocol devices to connect to ha
+  ];
+  networking.firewall.allowedUDPPorts = [
+    mDNS # allow mDNS for homekit announcements
+  ];
+
   services.home-assistant = {
     enable = true;
 
@@ -15,7 +25,7 @@ in {
       "esphome"
       "tasmota"
       "openweathermap"
-      "homekit"
+      "homekit_controller"
       "google_translate" # text to speech
     ];
 
@@ -66,8 +76,6 @@ in {
 
   sops.secrets.mosquitto_password = {};
 
-  networking.firewall.allowedTCPPorts = [mqtt_port];
-
   services.mosquitto = {
     enable = true;
 
@@ -108,7 +116,6 @@ in {
     };
   };
 
-
   services.traefik.dynamicConfigOptions.http.services.z2m = {
     loadBalancer = {
       servers = [{url = "http://127.0.0.1:${toString zigbee2mqtt_port}";}];
@@ -132,7 +139,6 @@ in {
     middlewares = ["default-headers"];
     tls.certResolver = "letsencrypt";
   };
-
 
   services.esphome = {
     enable = true;
