@@ -10,9 +10,13 @@ in {
     openFirewall = true;
 
     extraComponents = [
+      "default_config"
+      "met"
       "esphome"
       "tasmota"
       "openweathermap"
+      "homekit"
+      "google_translate" # text to speech
     ];
 
     config = {
