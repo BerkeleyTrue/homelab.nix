@@ -6,16 +6,16 @@
   traefik_public_url = "r3dm.com";
   package = inputs.tiab.defaultPackage;
   port = 9743;
-  user = "taib";
-  group = "taib";
-  dataDir = "/mnt/storage/taib";
+  user = "tiab";
+  group = "tiab";
+  dataDir = "/mnt/storage/tiab";
 in {
   systemd.services.tiab = {
     description = "Trapped In A Box - A personal Inventory System";
     after = ["network.target"];
     wantedBy = ["multi-user.target"];
     environment = {
-      DATABASE_URL = "file:" + dataDir + "/taib.sqlite";
+      DATABASE_URL = "file:" + dataDir + "/tiab.sqlite";
       PORT = toString port;
     };
 
