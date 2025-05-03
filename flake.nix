@@ -9,6 +9,8 @@
 
     sops-nix.url = "github:Mic92/sops-nix";
 
+    tiab.url = "github:berkeleytrue/tiab";
+
     # utils
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
