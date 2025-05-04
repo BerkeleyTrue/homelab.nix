@@ -119,6 +119,7 @@
           ];
           specialArgs = {
             inherit (self) outPath;
+            inherit (inputs) tiab;
           };
         };
       };
