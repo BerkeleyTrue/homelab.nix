@@ -187,11 +187,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1746344226,
-        "narHash": "sha256-HaeMifSERDUli3zW89H082RKHtF7FfaItFDwgfylOu8=",
+        "lastModified": 1746346210,
+        "narHash": "sha256-TCSmpeeTOLgZrrv+Ev+RGO2drhHqHfJdlebk7nIMtgM=",
         "owner": "berkeleytrue",
         "repo": "tiab",
-        "rev": "4b3d6229040bcde5494542a2d5cb74e84b595761",
+        "rev": "60e2c4af12706ff7f57f1335b1a9ff80aa174e48",
         "type": "github"
       },
       "original": {
