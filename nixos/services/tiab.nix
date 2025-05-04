@@ -1,10 +1,11 @@
 {
   lib,
   tiab,
+  pkgs,
   ...
 }: let
   traefik_public_url = "r3dm.com";
-  package = tiab.defaultPackage;
+  package = tiab.${pkgs.system}.default;
   port = 9743;
   user = "tiab";
   group = "tiab";
