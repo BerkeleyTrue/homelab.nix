@@ -1,5 +1,4 @@
-{
-  lib,
+{ lib,
   tiab,
   pkgs,
   ...
@@ -11,6 +10,11 @@
   group = "tiab";
   dataDir = "/mnt/storage/tiab";
 in {
+
+  systemd.tmpfiles.rules = [
+    "d ${dataDir} 0755 ${user} ${group} - -"
+  ];
+
   systemd.services.tiab = {
     description = "Trapped In A Box - A personal Inventory System";
     after = ["network.target"];
@@ -19,14 +23,6 @@ in {
       DATABASE_URL = "file:" + dataDir + "/tiab.sqlite";
       PORT = toString port;
     };
-
-    preStart = ''
-      if [ ! -d "${dataDir}" ]; then
-        mkdir -p "${dataDir}"
-        chown ${user}:${group} "${dataDir}"
-        chmod 755 "${dataDir}"
-      fi
-    '';
 
     serviceConfig = {
       Type = "simple";
