@@ -20,6 +20,14 @@ in {
       PORT = toString port;
     };
 
+    preStart = ''
+      if [ ! -d "${dataDir}" ]; then
+        mkdir -p "${dataDir}"
+        chown ${user}:${group} "${dataDir}"
+        chmod 755 "${dataDir}"
+      fi
+    '';
+
     serviceConfig = {
       Type = "simple";
       User = user;
