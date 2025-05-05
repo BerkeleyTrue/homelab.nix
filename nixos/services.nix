@@ -5,6 +5,7 @@ in {
     ./services/lubelogger.nix
     ./services/home-assistant.nix
     ./services/tiab.nix
+    ./services/concarne.nix
   ];
   # Enable the OpenSSH daemon.
   services.openssh = {

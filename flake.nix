@@ -10,6 +10,7 @@
     sops-nix.url = "github:Mic92/sops-nix";
 
     tiab.url = "github:berkeleytrue/tiab";
+    concarne.url = "github:berkeleytrue/concarne";
 
     # utils
     flake-parts.url = "github:hercules-ci/flake-parts";
@@ -119,7 +120,7 @@
           ];
           specialArgs = {
             inherit (self) outPath;
-            inherit (inputs) tiab;
+            inherit (inputs) tiab concarne;
           };
         };
       };
