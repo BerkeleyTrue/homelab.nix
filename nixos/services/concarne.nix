@@ -5,7 +5,7 @@
 }: let
   traefik_public_url = "r3dm.com";
   package = concarne.packages.${pkgs.system}.default;
-  port = 9443;
+  port = 9223;
   user = "concarne";
   group = "concarne";
   dataDir = "/mnt/storage/concarne";
