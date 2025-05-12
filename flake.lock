@@ -256,11 +256,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1746992768,
-        "narHash": "sha256-HIv2Bd+wiaAkdzOLgwxfdM76s0hj+ccp9dPeNGxrSrk=",
+        "lastModified": 1747008195,
+        "narHash": "sha256-BW1mIqJKffl8ebt17xZkWEVXZWc0IGYOhK16sCsbPAA=",
         "owner": "berkeleytrue",
         "repo": "tiab",
-        "rev": "0d93f511c9f63fbb623996e452a2487e63d8c6bf",
+        "rev": "6e6078196c21335dbe5583cb6c528dbcb3362c50",
         "type": "github"
       },
       "original": {
