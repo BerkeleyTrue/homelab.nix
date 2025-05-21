@@ -21,11 +21,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1746755527,
-        "narHash": "sha256-JMPaJRBIWzycBzVFGuB1puYQKRCjezJvdBfqbI80KX8=",
+        "lastModified": 1747869818,
+        "narHash": "sha256-Lt+h36GE5rVipuPKRXg5HOiQkPZ5LnKoV6xCJuK/sO8=",
         "owner": "berkeleytrue",
         "repo": "concarne",
-        "rev": "01a922943fc98ce86885f1d3d3eb62ad1de09df9",
+        "rev": "112ee4fa2b2b7f0560cc1dd0b3f25e5dba59536c",
         "type": "github"
       },
       "original": {
