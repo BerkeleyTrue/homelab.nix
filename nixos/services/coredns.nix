@@ -15,7 +15,7 @@
   # no forward, fail on all domains not configured
 }
 
-r3dm.com:${portString} {
+r3dm.com {
   log
   errors
 
@@ -29,7 +29,7 @@ r3dm.com:${portString} {
   }
 }
 
-r3dm.com:${portString} {
+r3dm.com {
   log
   errors
 
