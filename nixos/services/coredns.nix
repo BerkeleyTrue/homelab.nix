@@ -24,7 +24,7 @@ r3dm.com:${portString} {
     expr incidr(client_ip(), '10.6.0.0/16')
   }
   template IN A {
-    match "^r3dm.com$"
+    match .*\.r3dm.com$
     answer "{{.Name}} 60 IN A 10.6.7.10"
   }
 }
@@ -39,7 +39,7 @@ r3dm.com:${portString} {
   }
 
   template IN A {
-    match "^r3dm.com$"
+    match .*\.r3dm.com$
     answer "{{.Name}} 60 IN A 10.6.7.10"
   }
 }
