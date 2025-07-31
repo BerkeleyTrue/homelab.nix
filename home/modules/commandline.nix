@@ -111,6 +111,7 @@ in {
         gamend = "git commit --amend";
         glog = "git log --pretty=format:\"%C(yellow)%h %C(green)%cs %Cred%d %Creset%s%Cblue [%cn]\" --decorate";
         gstat = "git status";
+        grsth = "git reset --hard";
       };
 
       autosuggestion = {
