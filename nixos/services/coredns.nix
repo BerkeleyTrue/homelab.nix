@@ -23,8 +23,9 @@ r3dm.com:${portString} {
   view lan {
     expr incidr(client_ip(), '10.6.0.0/16')
   }
-  hosts {
-    10.6.7.10 r3dm.com
+  template IN A {
+    match "^r3dm.com$"
+    answer "{{.Name}} 60 IN A 10.6.7.10
   }
 }
 
@@ -36,8 +37,9 @@ r3dm.com:${portString} {
   view external {
     expr true
   }
-  hosts {
-    100.80.236.116 r3dm.com
+  template IN A {
+    match "^r3dm.com$"
+    answer "{{.Name}} 60 IN A 10.6.7.10
   }
 }
   '';
