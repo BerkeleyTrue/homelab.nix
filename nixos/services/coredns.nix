@@ -75,4 +75,9 @@ in {
   };
 
   users.groups.coredns = {};
+
+  # Ensure the data directory exists
+  systemd.tmpfiles.rules = [
+    "d ${dataDir} 0755 ${user} ${group} -"
+  ];
 }
