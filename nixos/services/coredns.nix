@@ -25,7 +25,7 @@ r3dm.com:${portString} {
   }
   template IN A {
     match "^r3dm.com$"
-    answer "{{.Name}} 60 IN A 10.6.7.10
+    answer "{{.Name}} 60 IN A 10.6.7.10"
   }
 }
 
@@ -37,9 +37,10 @@ r3dm.com:${portString} {
   view external {
     expr true
   }
+
   template IN A {
     match "^r3dm.com$"
-    answer "{{.Name}} 60 IN A 10.6.7.10
+    answer "{{.Name}} 60 IN A 10.6.7.10"
   }
 }
   '';
