@@ -4,6 +4,8 @@
   ...
 }: let
   port = 5533;
+  homelabIp = "10.6.7.10";
+  homelabTailscaleIp = "100.80.236.116";
   portString = toString port;
   user = "coredns";
   group = "coredns";
@@ -24,8 +26,8 @@ r3dm.com {
     expr incidr(client_ip(), '10.6.0.0/16')
   }
   template IN A {
-    match .*\.r3dm.com$
-    answer "{{.Name}} 60 IN A 10.6.7.10"
+    match ".*\.r3dm.com$"
+    answer "{{.Name}} 60 IN A ${homelabIp}"
   }
 }
 
@@ -34,13 +36,9 @@ r3dm.com {
   errors
 
   # External clients view (default)
-  view external {
-    expr true
-  }
-
   template IN A {
-    match .*\.r3dm.com$
-    answer "{{.Name}} 60 IN A 10.6.7.10"
+    match ".*\.r3dm.com$"
+    answer "{{.Name}} 60 IN A ${homelabTailscaleIp}"
   }
 }
   '';
