@@ -44,6 +44,8 @@ r3dm.com:${portString} {
 }
   '';
 in {
+  networking.firewall.allowedUDPPorts = [port];
+
   systemd.services.coredns = {
     description = "CoreDNS DNS server";
     after = ["network.target"];
