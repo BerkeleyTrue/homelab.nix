@@ -24,8 +24,8 @@ r3dm.com:${portString} {
     expr incidr(client_ip(), '10.6.0.0/16')
   }
   hosts {
-    10.6.6.10 r3dm.com
-    10.6.6.10 *.r3dm.com
+    10.6.7.10 r3dm.com
+    10.6.7.10 *.r3dm.com
   }
 }
 
