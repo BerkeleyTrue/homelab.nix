@@ -19,24 +19,11 @@ r3dm.com:${portString} {
   log
   errors
 
-  # Match LAN clients
-  view lan {
-    expr incidr(client_ip(), '10.6.0.0/16')
-    template IN A r3dm.com {
-      match .*\.r3dm\.com
-      answer "{{ .Name }} 60 IN A 10.6.6.10"
-      fallthrough
-    }
-  }
-
-  # Default view for all others (Tailscale, etc.)
-  view tailscale {
-    expr true
-    template IN A r3dm.com {
-      match .*\.r3dm\.com
-      answer "{{ .Name }} 60 IN A 100.80.236.116"
-      fallthrough
-    }
+  # Template with conditional logic for LAN vs external clients
+  template IN A r3dm.com {
+    match .*\.r3dm\.com
+    answer "{{ if (incidr .RemoteIP \"10.6.0.0/16\") }}{{ .Name }} 60 IN A 10.6.6.10{{ else }}{{ .Name }} 60 IN A 100.80.236.116{{ end }}"
+    fallthrough
   }
 }
   '';
