@@ -25,7 +25,6 @@ r3dm.com:${portString} {
   }
   hosts {
     10.6.7.10 r3dm.com
-    10.6.7.10 *.r3dm.com
   }
 }
 
@@ -39,7 +38,6 @@ r3dm.com:${portString} {
   }
   hosts {
     100.80.236.116 r3dm.com
-    100.80.236.116 *.r3dm.com
   }
 }
   '';
