@@ -19,15 +19,10 @@ r3dm.com:${portString} {
   log
   errors
 
-  # View for local LAN clients
-  acl local {
-    cidr 10.6.0.0/16
-  }
-
   # Match LAN clients
   view lan {
-    acl local
-    template IN A {
+    expr incidr(client_ip(), '10.6.0.0/16')
+    template IN A r3dm.com {
       match .*\.r3dm\.com
       answer "{{ .Name }} 60 IN A 10.6.6.10"
       fallthrough
@@ -36,7 +31,8 @@ r3dm.com:${portString} {
 
   # Default view for all others (Tailscale, etc.)
   view tailscale {
-    template IN A {
+    expr true
+    template IN A r3dm.com {
       match .*\.r3dm\.com
       answer "{{ .Name }} 60 IN A 100.80.236.116"
       fallthrough
