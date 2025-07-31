@@ -26,7 +26,7 @@ r3dm.com {
     expr incidr(client_ip(), '10.6.0.0/16')
   }
   template IN A {
-    match ".*\.r3dm.com$"
+    match ".*r3dm.com\.$"
     answer "{{.Name}} 60 IN A ${homelabIp}"
   }
 }
@@ -37,7 +37,7 @@ r3dm.com {
 
   # External clients view (default)
   template IN A {
-    match ".*\.r3dm.com$"
+    match ".*r3dm.com\.$"
     answer "{{.Name}} 60 IN A ${homelabTailscaleIp}"
   }
 }
