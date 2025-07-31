@@ -2,10 +2,11 @@
   traefik_public_url = "r3dm.com";
 in {
   imports = [
-    ./services/lubelogger.nix
-    ./services/home-assistant.nix
-    ./services/tiab.nix
     ./services/concarne.nix
+    ./services/coredns.nix
+    ./services/home-assistant.nix
+    ./services/lubelogger.nix
+    ./services/tiab.nix
   ];
   # Enable the OpenSSH daemon.
   services.openssh = {
