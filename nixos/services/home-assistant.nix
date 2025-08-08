@@ -35,7 +35,7 @@ in {
 
       homeassistant = {
         name = "roseann";
-        unit_system = "imperial";
+        unit_system = "us_customary";
         temperature_unit = "F";
         time_zone = "America/Los_Angeles";
       };
