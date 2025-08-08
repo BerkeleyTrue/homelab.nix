@@ -21,6 +21,7 @@ in {
     gh # GitHub CLI
     htop # An interactive process viewer
     iputils # Network monitoring tools including ping
+    just # A command runner with a friendly syntaxx
     lazydocker # simple terminal ui for both docker and docker-compose
     lsof # lists open files
     ngrok # Introspected tunnels to localhost

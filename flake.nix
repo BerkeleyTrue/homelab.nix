@@ -110,6 +110,9 @@
 
         devShells.default = pkgs.mkShell {
           inputsFrom = [config.boulder.devShell];
+          buildInputs = with pkgs; [
+            just
+          ];
         };
       };
       flake = {
