@@ -24,15 +24,15 @@ switch-debug:
 
 [group('os')]
 build-os:
-  sudo nixos-rebuild build --flake .
+  sudo nixos-rebuild switch --flake .
 
 [group('os')]
 build-os-debug:
-  sudo nixos-rebuild build --flake . --show-trace --verbose
+  sudo nixos-rebuild switch --flake . --show-trace --verbose
 
 [group('os')]
 build-os-dry-run:
-  sudo nixos-rebuild build --flake . --dry-run
+  sudo nixos-rebuild switch --flake . --dry-run
 
 # Update all the flake inputs
 [group('nix')]
