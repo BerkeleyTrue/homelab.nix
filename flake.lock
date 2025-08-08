@@ -1,20 +1,5 @@
 {
   "nodes": {
-    "boulder": {
-      "locked": {
-        "lastModified": 1700410615,
-        "narHash": "sha256-r67QjyDtT5GfC+HZEo2tGfG9WDc6R3C0OveLM9DPxrU=",
-        "owner": "berkeleytrue",
-        "repo": "nix-boulder-banner",
-        "rev": "7cf6a06a78218654b9b8c3df2e6c0c8ed865d967",
-        "type": "github"
-      },
-      "original": {
-        "owner": "berkeleytrue",
-        "repo": "nix-boulder-banner",
-        "type": "github"
-      }
-    },
     "concarne": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -192,7 +177,6 @@
     },
     "root": {
       "inputs": {
-        "boulder": "boulder",
         "concarne": "concarne",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
