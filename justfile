@@ -16,11 +16,11 @@ build-debug:
 
 [group('desktop')]
 switch:
-  ./result/home-path/bin/home-manager switch
+  ./result/home-path/bin/home-manager switch --flake .
 
 [group('desktop')]
 switch-debug: 
-  ./result/sw/bin/darwin-rebuild switch --show-trace --verbose
+  ./result/sw/bin/darwin-rebuild switch --flake . --show-trace --verbose
 
 [group('os')]
 build-os:
