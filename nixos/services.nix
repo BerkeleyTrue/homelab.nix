@@ -7,6 +7,7 @@ in {
     ./services/home-assistant.nix
     ./services/lubelogger.nix
     ./services/tiab.nix
+    ./services/audiobookshelf.nix
   ];
   # Enable the OpenSSH daemon.
   services.openssh = {
