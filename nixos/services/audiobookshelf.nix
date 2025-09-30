@@ -17,6 +17,10 @@ in {
     openFirewall = true;
   };
 
+  systemd.services.aduiobookshelf.serviceConfig.StateDirectory = baseNameOf dataDir;
+  systemd.services.aduiobookshelf.serviceConfig.WorkingDirectory = dataDir;
+  users.users.audiobookshelf.home = dataDir;
+
   services.traefik.dynamicConfigOptions.http.services.audiobookshelf = {
     loadBalancer = {
       servers = [{url = "http://${host}:${toString port}";}];
