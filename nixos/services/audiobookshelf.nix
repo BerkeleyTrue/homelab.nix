@@ -1,4 +1,4 @@
-{...}: let 
+{pkgs, ...}: let
   traefik_public_url = "r3dm.com";
   host = "0.0.0.0";
   port = 33299;
@@ -6,20 +6,36 @@
   group = "audiobookshelf";
   dataDir = "/mnt/storate/audiobookshelf";
 in {
-  services.audiobookshelf = {
-    enable = true;
+  systemd.services.audiobookshelf = {
+    description = "Audiobookshelf, a self-hosted audiobook server";
 
-    dataDir = dataDir;
-    host = host;
-    port = port;
-    user = user;
-    group = group;
-    openFirewall = true;
+    after = ["network.target"];
+    wantedBy = ["multi-user.target"];
+
+    serviceConfig = {
+      Type = "simple";
+
+      User = user;
+      Group = group;
+
+      StateDirectory = baseNameOf dataDir;
+      WorkingDirectory = dataDir;
+
+      ExecStart = "${pkgs.audiobookshelf}/bin/audiobookshelf --host ${host} --port ${toString port}";
+
+      Restart = "on-failure";
+    };
   };
 
-  systemd.services.aduiobookshelf.serviceConfig.StateDirectory = baseNameOf dataDir;
-  systemd.services.aduiobookshelf.serviceConfig.WorkingDirectory = dataDir;
-  users.users.audiobookshelf.home = dataDir;
+  users.users.audiobookshelf = {
+    isSystemUser = true;
+    group = group;
+    home = dataDir;
+  };
+
+  users.groups.audiobookshelf = {};
+
+  networking.firewall.allowedTCPPorts = [port];
 
   services.traefik.dynamicConfigOptions.http.services.audiobookshelf = {
     loadBalancer = {
