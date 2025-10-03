@@ -4,7 +4,7 @@
   port = 33299;
   user = "audiobookshelf";
   group = "audiobookshelf";
-  dataDir = "/mnt/storate/audiobookshelf";
+  dataDir = "/mnt/storage/audiobookshelf";
 in {
   systemd.services.audiobookshelf = {
     description = "Audiobookshelf, a self-hosted audiobook server";
@@ -64,5 +64,6 @@ in {
   # Ensure the data directory exists
   systemd.tmpfiles.rules = [
     "d ${dataDir} 0755 ${user} ${group} -"
+    "d ${dataDir}/library 0755 ${user} ${group} -"
   ];
 }
