@@ -6,6 +6,10 @@
   zigbee2mqtt_port = 9090;
   mDNS = 5353;
 in {
+  nixpkgs.config.permittedInsecurePackages = [
+    "python3.12-ecdsa-0.19.1"
+  ];
+
   networking.firewall.allowedTCPPorts = [
     mqtt_port
     homekit_port # allow homekit protocol devices to connect to ha
