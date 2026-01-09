@@ -13,8 +13,8 @@ in {
     bind # dns client
     bottom # A cross-platform graphical process/system monitor with a customizable interface and a multitude of features
     curl # transfer data from or to a server
-    dogdns # A command-line DNS cliento
-    du-dust # A more intuitive version of du in rust
+    doggo # A Command-line DNS Client for Humans
+    dust # A more intuitive version of du in rust
     eza # A modern replacement for ls
     fd # A simple, fast and user-friendly alternative to find
     fzf # A command-line fuzzy finder
