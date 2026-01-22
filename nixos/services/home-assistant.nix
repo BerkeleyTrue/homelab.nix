@@ -31,6 +31,7 @@ in {
       "openweathermap"
       "homekit_controller"
       "google_translate" # text to speech
+      "ecobee"
     ];
 
     config = {
