@@ -32,6 +32,8 @@ in {
       "homekit_controller"
       "google_translate" # text to speech
       "ecobee"
+      "zha" # zigbee home assistant
+      "cast" # chrome cast
     ];
 
     config = {
