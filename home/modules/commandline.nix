@@ -37,6 +37,7 @@ in {
     shfmt # A shell parser, formatter, and interpreter (POSIX/Bash/mksh)
     silver-searcher # A code-searching tool similar to ack, but faster
     sops # Simple and flexible tool for managing secrets
+    sqlite # Self-contained, serverless, zero-configuration, transactional SQL database engine
     ssh-to-age # convert ssh private keys in ed25519 format to age private keys
     tealdeer # A very fast implementation of tldr in Rust
     traceroute # print the route packets trace to network host
