@@ -8,11 +8,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1752190892,
-        "narHash": "sha256-uRC4rJZBk7yAWmmW4jda7jtG6JejLHIL87imBRXz9zY=",
+        "lastModified": 1775849324,
+        "narHash": "sha256-SrMQ9Fn4ZOufzOQmrkEv5V6q+LT1DaOiz1BVhTkCSTw=",
         "owner": "berkeleytrue",
         "repo": "concarne",
-        "rev": "db945fbbc579ccb840ff5472112b419116e13e1f",
+        "rev": "d5142ba44e448ec3d33159f5e1cce7d0f11411d0",
         "type": "github"
       },
       "original": {
@@ -376,11 +376,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1775799464,
-        "narHash": "sha256-ae8DtCMyJ02uVsdAlW2nP2HsBt08fDR/B5kzHzhtM2Q=",
+        "lastModified": 1775849903,
+        "narHash": "sha256-qds5f3dxJfR/qYe7uLxal7vknjoKmT+Cwqw0yBL0H8w=",
         "owner": "berkeleytrue",
         "repo": "taskbane",
-        "rev": "b601cc8704815c311d33964cb9f325781cc37cdf",
+        "rev": "2c056ce9ac7253e8b5f1b4250e9738f23d299402",
         "type": "github"
       },
       "original": {
@@ -397,11 +397,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773870793,
-        "narHash": "sha256-bna+sDc4krR5pknwM+2CRhIoQdscyVHams/+3srA7hw=",
+        "lastModified": 1775850819,
+        "narHash": "sha256-5jK4dHCPGl66HHAm8oLHnjpVZjttEwS1i2KEEAfjoMU=",
         "owner": "berkeleytrue",
         "repo": "tiab",
-        "rev": "878426039c12d6829f7afdef6d5d4c73068b4616",
+        "rev": "ec7c57928bc12acd9fc51b7e05764ce24affebb6",
         "type": "github"
       },
       "original": {
