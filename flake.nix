@@ -10,7 +10,13 @@
     sops-nix.url = "github:Mic92/sops-nix";
 
     tiab.url = "github:berkeleytrue/tiab";
+    tiab.inputs.nixpkgs.follows = "nixpkgs";
+
     concarne.url = "github:berkeleytrue/concarne";
+    concarne.inputs.nixpkgs.follows = "nixpkgs";
+
+    taskbane.url = "github:berkeleytrue/taskbane";
+    taskbane.inputs.nixpkgs.follows = "nixpkgs";
 
     # utils
     flake-parts.url = "github:hercules-ci/flake-parts";
@@ -74,7 +80,7 @@
           ];
           specialArgs = {
             inherit (self) outPath;
-            inherit (inputs) tiab concarne;
+            inherit (inputs) tiab concarne taskbane;
           };
         };
       };
