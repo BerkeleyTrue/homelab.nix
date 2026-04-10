@@ -34,6 +34,10 @@ build-os-debug:
 build-os-dry-run:
   sudo nixos-rebuild switch --flake . --dry-run
 
+[group('os')]
+build-os-check:
+  nix build .#nixosConfigurations.homelab.config.system.build.toplevel
+
 # Update all the flake inputs
 [group('nix')]
 up:
