@@ -1,11 +1,11 @@
 { lib,
-  tiab,
+  taskbane,
   pkgs,
   ...
 }: let
   name = "taskbane";
   traefik_public_url = "r3dm.com";
-  package = tiab.packages.${pkgs.system}.default;
+  package = taskbane.packages.${pkgs.system}.default;
   port = 7753;
   user = name;
   group = name;
