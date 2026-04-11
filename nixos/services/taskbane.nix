@@ -36,7 +36,7 @@ in {
     wantedBy = ["multi-user.target"];
     environment = {
       DB_URL = "file:" + dataDir + "/${name}.sqlite";
-      PUBLIC_DIR = "${package}/share/${name}";
+      PUBLIC_DIR = "${package}/share/${name}/public";
       PORT = toString port;
       ORIGIN = origin;
       RP_ID = rp_id;
