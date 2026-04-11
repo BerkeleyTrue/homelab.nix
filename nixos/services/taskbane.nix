@@ -1,6 +1,8 @@
-{ lib,
+{
+  lib,
   taskbane,
   pkgs,
+  config,
   ...
 }: let
   name = "taskbane";
@@ -11,10 +13,21 @@
   group = name;
   dataDir = "/mnt/storage/${name}";
   origin = "${name}.${traefik_public_url}";
+  tasksync-port = config.services.taskchampion-sync-server.port;
+  tasksync-host = config.services.taskchampion-sync-server.host;
+  task_url = "http://${tasksync-host}:${toString tasksync-port}";
 in {
   systemd.tmpfiles.rules = [
     "d ${dataDir} 0755 ${user} ${group} - -"
   ];
+
+  sops.secrets.taskbane_client_id = {};
+  sops.secrets.taskbane_secret = {};
+
+  sops.templates."taskbane.env".content = ''
+    TASK_CLIENT_ID=${config.sops.placeholder.taskbane_client_id};
+    TASK_SECRET=${config.sops.placeholder.taskbane_secret};
+  '';
 
   systemd.services.${name} = {
     description = "Taskbane: A taskwarrior Web Ui";
@@ -26,6 +39,7 @@ in {
       ORIGIN = origin;
       RP_ID = origin;
       RP_NAME = name;
+      TASK_URL = task_url;
     };
 
     serviceConfig = {
@@ -36,6 +50,7 @@ in {
       WorkingDirectory = dataDir;
       ExecStart = "${lib.getExe package}";
       Restart = "on-failure";
+      EnvironmentFile = config.sops.templates."taskbane.env".path;
     };
   };
 
