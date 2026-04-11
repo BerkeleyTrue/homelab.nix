@@ -76,7 +76,7 @@ in {
   services.traefik.dynamicConfigOptions.http.routers.${name} = {
     entrypoints = "web";
     service = name;
-    rule = "Host(`${origin}`)";
+    rule = "Host(`${name}.${traefik_public_url}`)";
 
     middlewares = ["ssl-redirect" "ssl-header"];
   };
@@ -84,7 +84,7 @@ in {
   services.traefik.dynamicConfigOptions.http.routers."${name}-secure" = {
     entrypoints = "secureweb";
     service = name;
-    rule = "Host(`${origin}`)";
+    rule = "Host(`${name}.${traefik_public_url}`)";
 
     middlewares = ["default-headers"];
     tls.certResolver = "letsencrypt";
