@@ -12,7 +12,7 @@
   user = name;
   group = name;
   dataDir = "/mnt/storage/${name}";
-  origin = "${name}.${traefik_public_url}";
+  origin = "https://${name}.${traefik_public_url}";
   tasksync-port = config.services.taskchampion-sync-server.port;
   tasksync-host = config.services.taskchampion-sync-server.host;
   task_url = "http://${tasksync-host}:${toString tasksync-port}";
