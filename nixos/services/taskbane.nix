@@ -12,7 +12,8 @@
   user = name;
   group = name;
   dataDir = "/mnt/storage/${name}";
-  origin = "https://${name}.${traefik_public_url}";
+  rp_id = "${name}.${traefik_public_url}";
+  origin = "https://${rp_id}";
   tasksync-port = config.services.taskchampion-sync-server.port;
   tasksync-host = config.services.taskchampion-sync-server.host;
   task_url = "http://${tasksync-host}:${toString tasksync-port}";
@@ -37,7 +38,7 @@ in {
       DB_URL = "file:" + dataDir + "/${name}.sqlite";
       PORT = toString port;
       ORIGIN = origin;
-      RP_ID = origin;
+      RP_ID = rp_id;
       RP_NAME = name;
       TASK_URL = task_url;
     };
