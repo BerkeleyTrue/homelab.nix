@@ -26,8 +26,8 @@ in {
   sops.secrets.taskbane_secret = {};
 
   sops.templates."taskbane.env".content = ''
-    TASK_CLIENT_ID=${config.sops.placeholder.taskbane_client_id};
-    TASK_SECRET=${config.sops.placeholder.taskbane_secret};
+    TASK_CLIENT_ID=${config.sops.placeholder.taskbane_client_id}
+    TASK_SECRET=${config.sops.placeholder.taskbane_secret}
   '';
 
   systemd.services.${name} = {
