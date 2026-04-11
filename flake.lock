@@ -376,11 +376,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1775869936,
-        "narHash": "sha256-QUR5e3OqEw4CB29AJeE99+hRim0E8uYyZ5A6aRLGcDI=",
+        "lastModified": 1775873607,
+        "narHash": "sha256-wsRQMBSCCwdcyBNYBgOgL12EvEGDSRuxL2asde4lSKQ=",
         "owner": "berkeleytrue",
         "repo": "taskbane",
-        "rev": "647be8b978dde3399c2efdcbae3da2d342907b28",
+        "rev": "b358f612b18dfec57b74ae99b214a6c4c4d316e4",
         "type": "github"
       },
       "original": {
