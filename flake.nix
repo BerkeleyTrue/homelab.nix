@@ -35,13 +35,5 @@
       imports = [
         (inputs.import-tree ./modules)
       ];
-
-      flake = {
-        nixosConfigurations.homelab = inputs.nixpkgs.lib.nixosSystem {
-          modules = [
-            ./nixos/configuration.nix
-          ];
-        };
-      };
     };
 }

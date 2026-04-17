@@ -13,4 +13,10 @@
     };
     sops.secrets.cloudflare_email = {};
   };
+
+  flake.modules.homeManager.sops = {
+    imports = [
+      inputs.sops-nix.homeManagerModules.sops
+    ];
+  };
 }
