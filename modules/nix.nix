@@ -27,7 +27,5 @@
     nix.settings.keep-outputs = true;
     nix.settings.keep-derivations = true;
     nix.settings.warn-dirty = false;
-
-    nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   };
 }

@@ -1,9 +1,19 @@
 {
-  flake.modules.nixos.user = {pkgs, ...}: {
+  config,
+  lib,
+  ...
+}: let 
+  username = config.username;
+in {
+  options.homelab.username = lib.mkOption {
+    type = lib.types.str;
+  };
+
+  config.flake.modules.nixos.user = {pkgs, ...}: {
     users.defaultUserShell = pkgs.zsh;
 
     # Define a user account. Don't forget to set a password with ‘passwd’.
-    users.users.bt = {
+    users.users.${username} = {
       isNormalUser = true;
       extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
       packages = with pkgs; [

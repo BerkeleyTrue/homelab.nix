@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.snapraid = {pkgs, ...}: {
+  flake.modules.nixos.snapraid-homelab = {pkgs, ...}: {
     environment.systemPackages = with pkgs; [
       mergerfs
     ];

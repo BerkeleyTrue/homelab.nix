@@ -1,6 +1,15 @@
 {
-  flake.modules.nixos.networking = {lib, ...}: {
-    networking.hostName = "homelab"; # Define your hostname.
+  flake.modules.nixos.networking = {
+    config,
+    lib,
+    ...
+  }: let
+    hostName = config.homelab.hostName;
+  in {
+    options.homelab.hostName = lib.mkOption {
+      type = lib.types.str;
+    };
+    networking.hostName = hostName; # Define your hostname.
     # Pick only one of the below networking options.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
