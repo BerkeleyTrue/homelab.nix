@@ -21,8 +21,7 @@
     # utils
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
-
-    home-manager-parts.url = "github:berkeleytrue/home-manager-parts";
+    import-tree.url = "github:vic/import-tree";
   };
 
   outputs = inputs @ {
@@ -32,56 +31,16 @@
   }:
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux"];
+
       imports = [
-        inputs.home-manager-parts.flakeModule
-        ./home
+        (inputs.import-tree ./modules)
       ];
-      perSystem = {system, ...}: let
-        pkgs = import inputs.nixpkgs {
-          inherit system;
 
-          overlays = [
-          ];
-
-          config = {
-            allowUnfree = true;
-            permittedInsecurePackages = [
-            ];
-          };
-        };
-      in {
-        formatter = pkgs.alejandra;
-        _module.args.pkgs = pkgs;
-
-        devShells.default = pkgs.mkShell {
-          name = "homelab";
-          buildInputs = with pkgs; [
-            just
-          ];
-          shellHook = ''
-            function menu () {
-              echo
-              echo -e "\033[1;34m>==> ️  '$name'\n\033[0m"
-              ${pkgs.just}/bin/just --list
-              echo
-              echo "(Run 'just --list' to display this menu again)"
-              echo
-            }
-
-            menu
-          '';
-        };
-      };
       flake = {
         nixosConfigurations.homelab = inputs.nixpkgs.lib.nixosSystem {
           modules = [
             ./nixos/configuration.nix
-            inputs.sops-nix.nixosModules.sops
           ];
-          specialArgs = {
-            inherit (self) outPath;
-            inherit (inputs) tiab concarne taskbane;
-          };
         };
       };
     };
