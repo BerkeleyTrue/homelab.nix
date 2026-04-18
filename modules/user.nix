@@ -1,19 +1,20 @@
 {
-  config,
-  lib,
-  ...
-}: let 
-  username = config.username;
-in {
-  options.homelab.username = lib.mkOption {
-    type = lib.types.str;
-  };
+  config.flake.modules.nixos.user = {
+    config,
+    lib,
+    pkgs,
+    ...
+  }: let
+    username = config.homelab.username;
+  in {
+    options.homelab.username = lib.mkOption {
+      type = lib.types.str;
+    };
 
-  config.flake.modules.nixos.user = {pkgs, ...}: {
-    users.defaultUserShell = pkgs.zsh;
+    config.users.defaultUserShell = pkgs.zsh;
 
     # Define a user account. Don't forget to set a password with ‘passwd’.
-    users.users.${username} = {
+    config.users.users.${username} = {
       isNormalUser = true;
       extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
       packages = with pkgs; [
@@ -23,7 +24,7 @@ in {
 
     # List packages installed in system profile. To search, run:
     # $ nix search wget
-    environment.systemPackages = with pkgs; [
+    config.environment.systemPackages = with pkgs; [
       neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
       curl
       wget
@@ -40,6 +41,6 @@ in {
     #   enableSSHSupport = true;
     # };
 
-    programs.zsh.enable = true;
+    config.programs.zsh.enable = true;
   };
 }

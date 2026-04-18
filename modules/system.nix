@@ -1,7 +1,5 @@
 {self, ...}: {
   flake.modules.nixos.system = {
-    system.stateVersion = "24.05";
-
     system.autoUpgrade = {
       enable = true;
       flake = self.outPath;

@@ -9,6 +9,7 @@ in {
     homelab.hostName = "homelab";
     homelab.username = username;
     nixpkgs.hostPlatform = "x86_64-linux";
+    nixpkgs.config.allowUnfree = true;
     system.stateVersion = "24.05";
 
     boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod"];
@@ -41,7 +42,6 @@ in {
   configurations.nixos.homelab = {
     modules = with self.modules.nixos; [
       boot
-      filesystem
       homelab
       locale
       networking
@@ -62,8 +62,6 @@ in {
   };
 
   configurations.home.homelab = {
-    inherit username;
-    system = "x86_64-linux";
     modules = with self.modules.homeManager; [
       homelab
       sops
