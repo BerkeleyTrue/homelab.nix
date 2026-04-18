@@ -19,6 +19,5 @@
     inputs.nixpkgs.lib.nixosSystem {
       modules = modules;
     })
-
   config.configurations.nixos;
 }
