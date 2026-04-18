@@ -1,4 +1,4 @@
-{
+{self, ...}: {
   flake.modules.nixos.atticd = {
     config,
     lib,
@@ -92,8 +92,8 @@
     };
 
     # don't need this
-    services.atticd.serviceConfig.StateDirectory = lib.mkForce null;
-    services.atticd.serviceConfig.DynamicUser = lib.mkForce false;
+    systemd.services.atticd.serviceConfig.StateDirectory = lib.mkForce null;
+    systemd.services.atticd.serviceConfig.DynamicUser = lib.mkForce false;
 
     # Ensure the data directory exists
     systemd.tmpfiles.rules = [
