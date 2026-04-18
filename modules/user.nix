@@ -1,5 +1,11 @@
 {
-  config.flake.modules.nixos.user = {
+  flake.modules.homeManager.user = {lib, ...}: {
+    options.homelab.username = lib.mkOption {
+      type = lib.types.str;
+    };
+  };
+
+  flake.modules.nixos.user = {
     config,
     lib,
     pkgs,

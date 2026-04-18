@@ -1,5 +1,6 @@
 {self, ...}: let
   username = "bt";
+  system = "x86_64-linux";
 in {
   flake.modules.nixos.homelab = {
     config,
@@ -8,7 +9,7 @@ in {
   }: {
     homelab.hostName = "homelab";
     homelab.username = username;
-    nixpkgs.hostPlatform = "x86_64-linux";
+    nixpkgs.hostPlatform = system;
     nixpkgs.config.allowUnfree = true;
     system.stateVersion = "24.05";
 
@@ -56,18 +57,21 @@ in {
   };
 
   flake.modules.homeManager.homelab = {
-    stateVersion = "22.11";
+    home.stateVersion = "22.11";
+    homelab.username = username;
 
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;
   };
 
   configurations.home.homelab = {
+    inherit system username;
     modules = with self.modules.homeManager; [
-      homelab
-      sops
       cli
+      homelab
       podman
+      sops
+      user
     ];
   };
 }
