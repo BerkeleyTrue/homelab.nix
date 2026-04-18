@@ -195,18 +195,18 @@
         "type": "github"
       }
     },
-    "home-manager-parts": {
+    "import-tree": {
       "locked": {
-        "lastModified": 1701298659,
-        "narHash": "sha256-ErH1ipzgPEyz3YI+NGutRUfRFZHyk1LGKnH8uTRpE/4=",
-        "owner": "berkeleytrue",
-        "repo": "home-manager-parts",
-        "rev": "60f7b35eb72a2ec223bc162d64364928e6c69678",
+        "lastModified": 1773693634,
+        "narHash": "sha256-BtZ2dtkBdSUnFPPFc+n0kcMbgaTxzFNPv2iaO326Ffg=",
+        "owner": "vic",
+        "repo": "import-tree",
+        "rev": "c41e7d58045f9057880b0d85e1152d6a4430dbf1",
         "type": "github"
       },
       "original": {
-        "owner": "berkeleytrue",
-        "repo": "home-manager-parts",
+        "owner": "vic",
+        "repo": "import-tree",
         "type": "github"
       }
     },
@@ -296,7 +296,7 @@
         "concarne": "concarne",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
-        "home-manager-parts": "home-manager-parts",
+        "import-tree": "import-tree",
         "nixpkgs": "nixpkgs",
         "sops-nix": "sops-nix",
         "taskbane": "taskbane",

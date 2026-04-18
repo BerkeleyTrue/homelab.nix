@@ -1,5 +1,0 @@
-{...}: {
-  import = [
-    ./nix-settings.nix
-  ];
-}
