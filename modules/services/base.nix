@@ -5,6 +5,7 @@
 
     imports = with self.modules.nixos; [
       adguard
+      atticd
       audiobookshelf
       concarne
       coredns
