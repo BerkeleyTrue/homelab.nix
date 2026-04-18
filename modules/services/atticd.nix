@@ -11,6 +11,7 @@
     user = name;
     group = name;
     dataDir = "/mnt/storage/${name}";
+    stateDir = "/var/lib/${name}";
   in {
     sops.secrets.atticd_secret = {};
 
@@ -27,7 +28,7 @@
       settings = {
         listen = "${host}:${toString port}";
         jwt = {};
-        database.url = "sqlite://${dataDir}/server.db?mode=rwc";
+        database.url = "sqlite://${stateDir}/server.db?mode=rwc";
         storage = {
           type = "local";
           path = dataDir;
@@ -91,9 +92,9 @@
       tls.certResolver = "letsencrypt";
     };
 
-    # don't need this
-    systemd.services.atticd.serviceConfig.StateDirectory = lib.mkForce null;
+    systemd.services.atticd.serviceConfig.StateDirectory = lib.mkForce name;
     systemd.services.atticd.serviceConfig.DynamicUser = lib.mkForce false;
+    systemd.services.atticd.serviceConfig.ReadWritePaths = [ dataDir ];
 
     # Ensure the data directory exists
     systemd.tmpfiles.rules = [
