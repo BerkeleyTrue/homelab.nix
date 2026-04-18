@@ -41,19 +41,20 @@ in {
   };
 
   configurations.nixos.homelab = {
-    modules = with self.modules.nixos; [
-      boot
-      homelab
-      locale
-      networking
-      nix
-      security
-      services-base
-      snapraid-homelab
-      sops
-      system
-      user
-    ];
+    modules = with self.modules.nixos;
+      [
+        boot
+        homelab
+        locale
+        networking
+        nix
+        security
+        services-base
+        snapraid-homelab
+        sops
+        user
+      ]
+      ++ [self.modules.nixos.system];
   };
 
   flake.modules.homeManager.homelab = {
