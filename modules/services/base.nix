@@ -1,5 +1,5 @@
 {self, ...}: {
-  flake.modules.nixos.base = {
+  flake.modules.nixos.services-base = {
     # Configure keymap in X11
     services.xserver.xkb.layout = "us";
 
@@ -14,6 +14,7 @@
       tailscale
       task
       taskbane
+      tiab
       traefik
     ];
   };

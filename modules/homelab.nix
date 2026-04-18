@@ -47,6 +47,7 @@ in {
       networking
       nix
       security
+      services-base
       snapraid-homelab
       sops
       system

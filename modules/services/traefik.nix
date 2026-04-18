@@ -14,21 +14,21 @@
       default = "r3dm.com";
     };
 
-    sops.secrets.cloudflare_email = {
+    config.sops.secrets.cloudflare_email = {
       mode = "0440";
       inherit owner group;
     };
-    sops.secrets.cloudflare_dns_api_token = {
+    config.sops.secrets.cloudflare_dns_api_token = {
       mode = "0440";
       inherit owner group;
     };
 
-    systemd.services.traefik.environment = {
+    config.systemd.services.traefik.environment = {
       CF_API_EMAIL_FILE = config.sops.secrets.cloudflare_email.path;
       CF_DNS_API_TOKEN_FILE = config.sops.secrets.cloudflare_dns_api_token.path;
     };
 
-    services.traefik = {
+    config.services.traefik = {
       enable = true;
 
       staticConfigOptions = {

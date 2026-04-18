@@ -5,7 +5,7 @@
     pkgs,
     ...
   }: let
-    traefik_public_url = config.traefik_public_url;
+    public_url = config.traefik.public_url;
     package = pkgs.lubelogger;
     port = 9743;
     user = "lubelogger";
@@ -60,7 +60,7 @@
     services.traefik.dynamicConfigOptions.http.routers.lubelogger = {
       entrypoints = "web";
       service = "lubelogger";
-      rule = "Host(`lubelogger.${traefik_public_url}`)";
+      rule = "Host(`lubelogger.${public_url}`)";
 
       middlewares = ["ssl-redirect" "ssl-header"];
     };
@@ -68,7 +68,7 @@
     services.traefik.dynamicConfigOptions.http.routers.lubelogger-secure = {
       entrypoints = "secureweb";
       service = "lubelogger";
-      rule = "Host(`lubelogger.${traefik_public_url}`)";
+      rule = "Host(`lubelogger.${public_url}`)";
 
       middlewares = ["default-headers"];
       tls.certResolver = "letsencrypt";
