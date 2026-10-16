@@ -1,5 +1,9 @@
 {
-  flake.modules.nixos.forgejo = {config, ...}: let
+  flake.modules.nixos.forgejo = {
+    config,
+    lib,
+    ...
+  }: let
     name = "forgejo";
     user = name;
     group = name;
@@ -30,6 +34,24 @@
         session.COOKIE_SECURE = true;
       };
     };
+
+    sops.secrets.forgejo_admin_password = {
+      owner = user;
+      inherit group;
+    };
+
+    # create the admin account on startup; no-op if it already exists
+    systemd.services.forgejo.preStart = let
+      adminCmd = "${lib.getExe config.services.forgejo.package} admin user";
+      passwordFile = config.sops.secrets.forgejo_admin_password.path;
+    in
+      lib.mkAfter ''
+        ${adminCmd} create --admin \
+          --username bt \
+          --email forgejo@${public_url} \
+          --password "$(tr -d '\n' < ${passwordFile})" \
+          --must-change-password=false || true
+      '';
 
     networking.firewall.allowedTCPPorts = [port];
 
