@@ -171,6 +171,7 @@
             }
           ];
         };
+        shellWrapperName = "y";
       };
 
       zoxide = {
