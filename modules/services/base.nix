@@ -9,6 +9,7 @@
       audiobookshelf
       concarne
       coredns
+      forgejo
       home-assistant
       lubelogger
       openssh
