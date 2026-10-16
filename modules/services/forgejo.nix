@@ -1,10 +1,15 @@
 {
   flake.modules.nixos.forgejo = {config, ...}: let
+    name = "atticd";
+    user = name;
+    group = name;
     public_url = config.traefik.public_url;
     domain = "forgejo.${public_url}";
     host = "0.0.0.0";
     port = 3330;
-    dataDir = "/mnt/storage/forgejo";
+    dataDir = "/mnt/storage/${name}";
+    # already the default state dir
+    # stateDir = "/var/lib/${name}";
   in {
     services.forgejo = {
       enable = true;
@@ -51,5 +56,10 @@
       middlewares = ["default-headers"];
       tls.certResolver = "letsencrypt";
     };
+
+    # Ensure the data directory exists
+    systemd.tmpfiles.rules = [
+      "d ${dataDir} 0755 ${user} ${group} - -"
+    ];
   };
 }
