@@ -1,10 +1,10 @@
 {
   flake.modules.nixos.forgejo = {config, ...}: let
-    name = "atticd";
+    name = "forgejo";
     user = name;
     group = name;
     public_url = config.traefik.public_url;
-    domain = "forgejo.${public_url}";
+    domain = "${name}.${public_url}";
     host = "0.0.0.0";
     port = 3330;
     dataDir = "/mnt/storage/${name}";
