@@ -37,6 +37,17 @@
       ];
     };
 
+    # Keep the disk roots and the mergerfs pool owned by root so
+    # systemd-tmpfiles doesn't flag service subdirs as unsafe path transitions
+    # z flag to ensure it only modifies user settings and never creates the files
+    systemd.tmpfiles.rules = [
+      "z /mnt/pari1 0755 root root - -"
+      "z /mnt/disk1 0755 root root - -"
+      "z /mnt/disk2 0755 root root - -"
+      "z /mnt/disk3 0755 root root - -"
+      "z /mnt/storage 0755 root root - -"
+    ];
+
     services.snapraid = {
       enable = true;
       contentFiles = [
