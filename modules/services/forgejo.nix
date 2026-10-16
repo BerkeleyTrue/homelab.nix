@@ -60,6 +60,8 @@
     # Ensure the data directory exists
     systemd.tmpfiles.rules = [
       "d ${dataDir} 0755 ${user} ${group} - -"
+      "d ${dataDir}/custom 0755 ${user} ${group} - -"
+      "d ${dataDir}/custom/conf 0755 ${user} ${group} - -"
     ];
   };
 }
